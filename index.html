@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!--
+      Content Security Policy (PLAN §3.10): no inline script, text-only rendering.
+      connect-src: when live review is configured, append your Supabase project URL, e.g.
+      "connect-src 'self' https://<project-ref>.supabase.co". Mock mode needs 'self' only.
+      Dev-server caveat (D14): Vite's React refresh preamble is an inline script; verify `npm run dev`
+      under this policy and relax it for development only if required.
+    -->
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'"
+    />
+    <title>i18n String Reviewer</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

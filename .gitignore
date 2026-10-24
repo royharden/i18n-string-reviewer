@@ -1,0 +1,20 @@
+# Dependencies and build output
+node_modules/
+dist/
+
+# Secrets: never commit real values (.env.example holds names only)
+.env
+.env.*
+!.env.example
+
+# Generated, local-only
+.cache/
+demo-output/
+results/*
+!results/.gitkeep
+
+# Tooling
+*.log
+.DS_Store
+coverage/
+.vite/
