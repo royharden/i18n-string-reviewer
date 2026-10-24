@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "version": "s34-jev-provisional-2026-10-24-v1",
+  "status": "provisional-unmeasured",
+  "enabledLocales": [],
+  "thresholds": {
+    "mistranslated": 0.5,
+    "omits_source_content": 0.5,
+    "adds_content_not_in_source": 0.5,
+    "wrong_sense_for_context": 0.5,
+    "wrong_register": 0.5
+  },
+  "devProbe": {
+    "pairsPerLocale": 30,
+    "absoluteRecallFloor": 0.8,
+    "injectionToleranceMaxDelta": 0.1,
+    "status": "provisional-unmeasured",
+    "note": "Floors and thresholds are construction placeholders, not dev-tuned or measured. Fix on real dev data before held-out evaluation."
+  },
+  "defaultInclusion": "Disabled until real per-locale dev probe and injection-tolerance validation, then held-out cascade semantic recall matches LLM at lower cost."
+}

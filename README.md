@@ -4,7 +4,7 @@ Review locale JSON, inspect deterministic and optional model findings, decide wh
 
 ## Construction status
 
-**Dirty Mode source construction in progress — runtime unverified.** M1–M4 deterministic checks, synthetic corpus, mock workflow/UI and live integration source are statically reviewed. Hard-case reviewer contracts and evaluation source remain next.
+**Dirty Mode source construction in progress — runtime unverified.** M1–M5 deterministic checks, synthetic corpus, mock workflow/UI, live integration and hard-case reviewer source are statically reviewed. Evaluation source remains next.
 
 No dependencies have been installed; no application, test suite, lint, typecheck, build, browser, database or provider call has run. Static checks consist of source tracing and TypeScript type-stripping/syntax parsing. They do not resolve imports, type-check, or parse TSX. There is **no lockfile**. This repo is **not import-ready until D1**, followed by D2 and the remaining applicable checks in [deferred validation](docs/DEFERRED-VALIDATION.md).
 
@@ -25,6 +25,7 @@ The intended default is mock mode, with synthetic fixtures and no API keys or ne
 - `src/core/l10nchecks`: strict UTF-8 JSON import, segment-array paths, locale/dialect checks, metadata validation and seventeen deterministic rules.
 - `src/core/maskgate`, `cited`, `context`, `rulings`, `export`, `review`: masked review, evidence validation, structural fix gate, fingerprint-bound decisions and download-only patches (statically reviewed construction).
 - `fixtures`: agent-authored MIT TaskBoard translations and planted semantic labels. Seed selection and the frozen source-key split are disclosed in `fixtures/manifest.json`; this partition was selected before model/rule outputs existed, rather than drawn blindly.
+- `src/core/review/{heuristic,jev,cascade}.ts`: local baseline and experimental screening contracts; Jev/cascade are disabled by default with unmeasured provisional configuration. Synthetic probability examples test composition only.
 - `src/core/providers`, `src/core/callledger` and `supabase/`: provider transports, atomic SQL accounting, persistent Node eval journal and authenticated preview/review function source. See [BOLT-HANDOFF.md](BOLT-HANDOFF.md); none has been deployed or exercised.
 - The backend design stores only paid-call accounting. Locale text and rulings are not persisted server-side. Provider credentials belong in server/eval environment variables, never frontend variables.
 

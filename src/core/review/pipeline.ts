@@ -328,7 +328,9 @@ export async function reviewBatch(
   );
   const batchItems: BatchItem[] = batch.map((r) => ({ masked: r.mask.masked, restore: r.mask.restore, key: r.key, sourceText: r.sourceText, targetText: r.targetText }));
   const byId = new Map(batch.map((r) => [r.itemId, r] as const));
-  const validation = await validateModelFindings(reply.rawFindings, batchItems, reviewer.id);
+  // Local heuristic claims share evidence/gate validation but are never attributed to a model
+  // or assigned a deterministic l10nchecks rule id.
+  const validation = await validateModelFindings(reply.rawFindings, batchItems, reviewer.id, reviewer.id === 'heuristic' ? 'static' : 'model');
   const findings: Finding[] = [];
   const rejections: GateRejection[] = [];
   const invariant: InvariantRecord[] = [];
@@ -613,6 +615,7 @@ export function summarizePipeline(result: PipelineResult): string {
   lines.push('deterministic findings by rule:');
   for (const rule of Object.keys(result.ruleCounts).sort()) lines.push(`  ${rule}: ${result.ruleCounts[rule]}`);
   const model = result.findings.filter((f) => f.source === 'model');
+  if (result.reviewer === 'heuristic') lines.push(`local heuristic findings: ${result.findings.filter((f) => f.reviewer === 'heuristic').length} (non-model comparison floor)`);
   lines.push(
     `model findings: ${model.length} (supported ${model.filter((f) => f.evidenceStatus === 'supported').length}, unsupported ${model.filter((f) => f.evidenceStatus === 'unsupported').length}, with gated fix ${model.filter((f) => f.suggestedFix !== undefined).length}); dropped ${result.dropped}; duplicate ids ${result.duplicateFindings}; batches ${result.batches}`,
   );

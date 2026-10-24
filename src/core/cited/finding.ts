@@ -132,7 +132,7 @@ function emptyDrops(): Record<DropReason, number> {
 const sameKey = (a: readonly string[], b: readonly string[]): boolean => a.length === b.length && a.every((s, i) => s === b[i]);
 
 /** Validate a reviewer's raw reply against the batch that produced it. */
-export async function validateModelFindings(raw: unknown, batch: readonly BatchItem[], reviewer: string): Promise<ModelValidation> {
+export async function validateModelFindings(raw: unknown, batch: readonly BatchItem[], reviewer: string, source: Finding['source'] = 'model'): Promise<ModelValidation> {
   const dropReasons = emptyDrops();
   const list: unknown = Array.isArray(raw) ? raw : (raw as { findings?: unknown } | null)?.findings;
   if (!Array.isArray(list)) {
@@ -174,7 +174,7 @@ export async function validateModelFindings(raw: unknown, batch: readonly BatchI
       evidence: ev.evidence,
       evidenceStatus: ev.status,
       ...(ev.offset !== undefined ? { evidenceOffset: ev.offset } : {}),
-      source: 'model',
+      source,
       reviewer,
       itemId: item.masked.itemId,
     };
