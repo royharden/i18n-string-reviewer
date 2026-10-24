@@ -1,0 +1,77 @@
+{
+  "schemaVersion": 1,
+  "name": "TaskBoard evaluation corpus",
+  "description": "Synthetic task-management app strings: a clean ICU corpus (en source + fr, ru, ar, ja targets), a small clean i18next-dialect corpus with the same locales, context and glossary metadata, and hand-planted semantic labels. Structural labels are generated from the clean corpus by the seeded mutation generator (see fixtures/mutations/README.md).",
+  "files": [
+    { "path": "fixtures/corpus/en.json", "locale": "en", "dialect": "icu", "role": "source", "corpus": "taskboard-icu" },
+    { "path": "fixtures/corpus/fr.json", "locale": "fr", "dialect": "icu", "role": "target", "corpus": "taskboard-icu" },
+    { "path": "fixtures/corpus/ru.json", "locale": "ru", "dialect": "icu", "role": "target", "corpus": "taskboard-icu" },
+    { "path": "fixtures/corpus/ar.json", "locale": "ar", "dialect": "icu", "role": "target", "corpus": "taskboard-icu" },
+    { "path": "fixtures/corpus/ja.json", "locale": "ja", "dialect": "icu", "role": "target", "corpus": "taskboard-icu" },
+    { "path": "fixtures/corpus-i18next/en.json", "locale": "en", "dialect": "i18next", "role": "source", "corpus": "taskboard-i18next" },
+    { "path": "fixtures/corpus-i18next/fr.json", "locale": "fr", "dialect": "i18next", "role": "target", "corpus": "taskboard-i18next" },
+    { "path": "fixtures/corpus-i18next/ru.json", "locale": "ru", "dialect": "i18next", "role": "target", "corpus": "taskboard-i18next" },
+    { "path": "fixtures/corpus-i18next/ar.json", "locale": "ar", "dialect": "i18next", "role": "target", "corpus": "taskboard-i18next" },
+    { "path": "fixtures/corpus-i18next/ja.json", "locale": "ja", "dialect": "i18next", "role": "target", "corpus": "taskboard-i18next" }
+  ],
+  "context": "fixtures/context.json",
+  "glossary": "fixtures/glossary.json",
+  "labels": {
+    "semantic": "fixtures/labels/semantic.jsonl",
+    "semanticCorpus": "taskboard-icu",
+    "mutations": "fixtures/mutations/README.md"
+  },
+  "seed": 20261035,
+  "mutation": {
+    "seed": 20261035,
+    "generator": "src/core/evalkit/mutate.ts (milestone M6)",
+    "operators": "fixtures/mutations/README.md"
+  },
+  "split": {
+    "by": "source_key",
+    "dev": 0.6,
+    "heldout": 0.4,
+    "rule": "score = fmix32(FNV-1a-32(JSON.stringify(keyPath) + \"\\u0000\" + String(seed))) / 2^32 over UTF-16 code units; dev when score < dev fraction, else heldout. Key-based: all locales and labels of a source key share its split. i18next plural-suffix families split by their base key.",
+    "implementation": "src/core/evalkit/split.ts",
+    "regenerate": "tsx scripts/make-split.ts (rewrites the split field of every semantic label); tsx scripts/make-split.ts --check verifies without writing",
+    "demoRule": "Demo fixtures and any UI or prompt tuning use dev-split keys only; held-out keys never appear in fixtures/demo."
+  },
+  "seedSelection": {
+    "date": "2026-10-24",
+    "selectedSeed": 20261035,
+    "kind": "Disclosure, not a justification. The seed was not a single blind draw: it was picked from several nearby candidate seeds by looking at where the split put particular keys and labels.",
+    "seedsTried": {
+      "loggedSeedBySeed": false,
+      "knownWindow": [20261025, 20261035],
+      "conservativeEnvelope": [20261025, 20261061],
+      "note": "The original selection run did not record every seed it computed. The 2026-10-24 M2 review reproduced the alternatives in 20261025–20261035. The comment in src/core/evalkit/split.ts shows that 20261060–20261061 were also computed while the hash was designed, so 20261025–20261061 is the conservative range that may have been inspected. Seeds below 20261025 are not known either way."
+    },
+    "criteriaUsed": [
+      "Both \"Post\" keys, feed.postButton and feed.postHeading, in dev, so the M3 demo can show the noun/verb pair on dev-split keys only. In 20261025–20261035 this held for 20261025, 20261029, 20261031, 20261032 and 20261035.",
+      "Context-dependent labels in held-out: among those five, 20261035 put the most context-dependent labels in held-out (15 of 34, against 8, 11, 12 and 10). The selection therefore favoured a larger held-out share of context-dependent labels, slightly above the proportional 40 % (about 13.6)."
+    ],
+    "windowRecomputed": {
+      "columns": ["seed", "bothPostKeysInDev", "heldoutLabels/61", "heldoutContextDependent/34", "devSourceKeys/108"],
+      "rows": [
+        [20261025, true, 22, 8, 66],
+        [20261026, false, 38, 21, 49],
+        [20261027, false, 26, 13, 63],
+        [20261028, false, 27, 15, 63],
+        [20261029, true, 22, 11, 63],
+        [20261030, false, 29, 15, 65],
+        [20261031, true, 18, 12, 72],
+        [20261032, true, 24, 10, 67],
+        [20261033, false, 23, 11, 72],
+        [20261034, false, 30, 17, 57],
+        [20261035, true, 23, 15, 66]
+      ],
+      "note": "Recomputed on 2026-10-24 from src/core/evalkit/split.ts and the current fixtures (61 labels, 34 context-dependent, 108 source keys). Per-locale evenness was not the deciding criterion: 20261031 spreads its 12 held-out context-dependent labels 3/3/3/3 over fr/ru/ar/ja, while 20261035 spreads its 15 as fr 2, ru 3, ar 6, ja 4."
+    },
+    "notLookedAt": "When the seed was selected no reviewer, prompt, threshold, rule-engine result, mutation output or model output existed. The selection looked only at key placement and label counts per split, never at any model or rule result.",
+    "consequence": "The held-out partition is a selected partition, conditioned on the two criteria above, not one pre-registered draw. Because no model or rule result was involved it cannot carry information about reviewer performance, but the same agent authored every label and could see which labels each candidate seed put in held-out. Read held-out results with that in mind. The mutation seed reuses this seed; the mutation generator (M6) did not exist at selection time."
+  },
+  "heldoutFrozenAt": "2026-10-24",
+  "freeze": "Held-out split frozen on 2026-10-24, before any reviewer, prompt or threshold exists. The seed was selected among nearby seeds on key placement and label counts only (both Post keys in dev; held-out context-dependent label count), never on any model or rule result; see seedSelection. The held-out set is evaluated once (results/heldout.lock); there is no force-rerun. Any change to the corpus keys, labels, seed or split rule after that run requires a new heldout-v2 manifest.",
+  "license": "MIT",
+  "authorship": "Every corpus string, translation, context entry, glossary entry and semantic label is synthetic and agent-authored (0504_Claude_Opus55_S34-INT coder subagent, Claude Opus 5.5) on 2026-10-24, not reviewed by a native speaker. The translations come from a model family possibly related to the reviewer models, so semantic scores on this corpus are not comparable to human-labelled data. No real product, user or credential data."
+}

@@ -1,0 +1,152 @@
+{
+  "app": {
+    "name": "TaskBoard",
+    "tagline": "خطّط لعملك وتابعه وأنجزه مع فريقك."
+  },
+  "nav": {
+    "dashboard": "لوحة المعلومات",
+    "projects": "المشاريع",
+    "inbox": "البريد الوارد",
+    "calendar": "التقويم",
+    "reports": "التقارير",
+    "archive": "الأرشيف",
+    "settings": "الإعدادات",
+    "help": "المساعدة"
+  },
+  "actions": {
+    "save": "حفظ",
+    "cancel": "إلغاء",
+    "delete": "حذف",
+    "edit": "تعديل",
+    "archive": "أرشفة",
+    "restore": "استعادة",
+    "duplicate": "تكرار",
+    "share": "مشاركة",
+    "export": "تصدير",
+    "open": "فتح",
+    "back": "رجوع",
+    "ok": "OK",
+    "retry": "إعادة المحاولة"
+  },
+  "dialog": {
+    "close": "إغلاق",
+    "unsavedTitle": "تجاهل التغييرات غير المحفوظة؟",
+    "unsavedBody": "ستفقد تعديلاتك على <b>{title}</b>.",
+    "deleteConfirm": "حذف {count, plural, zero {# مهمة} one {مهمة واحدة} two {مهمتين} few {# مهام} many {# مهمة} other {# مهمة}}؟ لا يمكن التراجع عن هذا الإجراء."
+  },
+  "board": {
+    "title": "اللوحة",
+    "newColumn": "إضافة عمود",
+    "emptyColumn": "لا توجد بطاقات في هذا العمود بعد.",
+    "cardCount": "{count, plural, zero {لا توجد بطاقات} one {بطاقة واحدة} two {بطاقتان} few {# بطاقات} many {# بطاقة} other {# بطاقة}}",
+    "filterPlaceholder": "تصفية البطاقات",
+    "moveCard": "نُقلت البطاقة «{cardTitle}» إلى {column}",
+    "wipLimit": "الحد الأقصى للبطاقات: {limit, number}",
+    "autoArchive": "تُؤرشَف البطاقات في عمود «مكتملة» بعد ٣٠ يومًا."
+  },
+  "task": {
+    "newTask": "مهمة جديدة",
+    "titleLabel": "العنوان",
+    "close": "إنهاء",
+    "reopen": "إعادة فتح",
+    "watch": "متابعة",
+    "lead": "المسؤول",
+    "assignedTo": "مُسندة إلى {name}",
+    "assignedBy": "{gender, select, female {أسندت إليك هذه المهمة} male {أسند إليك هذه المهمة} other {أُسندت إليك هذه المهمة}}",
+    "dueDate": "تاريخ الاستحقاق: {date, date, medium}",
+    "overdue": "{days, plural, zero {متأخرة أقل من يوم} one {متأخرة يومًا واحدًا} two {متأخرة يومين} few {متأخرة # أيام} many {متأخرة # يومًا} other {متأخرة # يوم}}",
+    "commentCount": "{count, plural, =0 {لا توجد تعليقات} zero {لا توجد تعليقات} one {تعليق واحد} two {تعليقان} few {# تعليقات} many {# تعليقًا} other {# تعليق}}",
+    "subtaskProgress": "اكتملت {done, number} من أصل {total, number} من المهام الفرعية",
+    "rank": "{place, selectordinal, other {رقم # في قائمة الانتظار}}",
+    "priority": {
+      "high": "عالية",
+      "medium": "متوسطة",
+      "low": "منخفضة"
+    }
+  },
+  "status": {
+    "open": "مفتوحة",
+    "inProgress": "قيد التنفيذ",
+    "blocked": "محظورة",
+    "done": "مكتملة",
+    "draft": "مسودة"
+  },
+  "feed": {
+    "postButton": "نشر",
+    "postHeading": "منشور",
+    "placeholder": "اكتب تحديثًا لفريقك…",
+    "reactions": "{count, plural, zero {لا توجد تفاعلات} one {تفاعل واحد} two {تفاعلان} few {# تفاعلات} many {# تفاعلًا} other {# تفاعل}}",
+    "mentioned": "أشار إليك <b>{name}</b> في {project}",
+    "edited": "عُدِّل {minutes, plural, zero {الآن} one {قبل دقيقة واحدة} two {قبل دقيقتين} few {قبل # دقائق} many {قبل # دقيقة} other {قبل # دقيقة}}"
+  },
+  "rooms": {
+    "book": "حجز",
+    "available": "متاحة",
+    "busy": "مشغولة",
+    "capacity": "{seats, plural, zero {لا تتسع لأحد} one {تتسع لشخص واحد} two {تتسع لشخصين} few {تتسع لـ# أشخاص} many {تتسع لـ# شخصًا} other {تتسع لـ# شخص}}"
+  },
+  "library": {
+    "book": "كتاب",
+    "handbook": "دليل"
+  },
+  "automation": {
+    "runNow": "تشغيل",
+    "runHeader": "عملية التشغيل",
+    "lastRun": "آخر تشغيل في {date, date, short} الساعة {time, time, short}",
+    "failedRuns": "{count, plural, zero {لم تفشل أي عملية تشغيل} one {فشلت عملية تشغيل واحدة} two {فشلت عمليتا تشغيل} few {فشلت # عمليات تشغيل} many {فشلت # عملية تشغيل} other {فشلت # عملية تشغيل}}",
+    "trigger": "عندما تنتقل بطاقة إلى {column}"
+  },
+  "search": {
+    "placeholder": "ابحث في المهام والأشخاص والملفات",
+    "matchCase": "مطابقة حالة الأحرف",
+    "match": "استيفاء",
+    "results": "{count, plural, zero {لا توجد نتائج} one {نتيجة واحدة} two {نتيجتان} few {# نتائج} many {# نتيجة} other {# نتيجة}}",
+    "noResults": "لا توجد نتائج لـ«{query}»"
+  },
+  "billing": {
+    "planFree": "مجاني",
+    "save": "وفّر {percent, number, percent} مع الفوترة السنوية",
+    "seats": "{count, plural, zero {لا مقاعد} one {مقعد واحد} two {مقعدان} few {# مقاعد} many {# مقعدًا} other {# مقعد}}",
+    "order": "طلب الشراء",
+    "total": "المبلغ المستحق: {amount}"
+  },
+  "sort": {
+    "order": "الترتيب"
+  },
+  "meeting": {
+    "present": "بدء العرض",
+    "attendancePresent": "حاضر"
+  },
+  "errors": {
+    "network": "تعذّر الوصول إلى الخادم. تحقّق من اتصالك وحاول مرة أخرى.",
+    "notFound": "لم تعد هذه المهمة موجودة.",
+    "permission": "ليس لديك إذن بتعديل {project}.",
+    "fileTooLarge": "يجب أن يكون حجم الملفات أقل من {size, number} ميغابايت.",
+    "rateLimited": "طلبات كثيرة جدًا. حاول مرة أخرى بعد {seconds, plural, zero {لحظات} one {ثانية واحدة} two {ثانيتين} few {# ثوانٍ} many {# ثانية} other {# ثانية}}.",
+    "sessionExpired": "انتهت صلاحية جلستك. <link>سجّل الدخول مرة أخرى</link>",
+    "conflict": "عدّل {name} هذه المهمة أثناء تحريرك لها."
+  },
+  "notifications": {
+    "unread": "{count, plural, =0 {لا توجد إشعارات جديدة} zero {لا توجد إشعارات جديدة} one {إشعار واحد غير مقروء} two {إشعاران غير مقروءين} few {# إشعارات غير مقروءة} many {# إشعارًا غير مقروء} other {# إشعار غير مقروء}}",
+    "taskAssigned": "أسند إليك {actor} المهمة <b>{taskTitle}</b>",
+    "dueSoon": "موعد استحقاق <b>{taskTitle}</b> غدًا"
+  },
+  "onboarding": {
+    "welcome": "مرحبًا بك في TaskBoard يا {name}!",
+    "step": "الخطوة {current, number} من {total, number}",
+    "invite": "ادعُ فريقك",
+    "learnMore": "جديد على اللوحات؟ <link>اقرأ الدليل</link>."
+  },
+  "members": {
+    "role": "{role, select, owner {المالك} admin {المسؤول} member {عضو} other {ضيف}}",
+    "joined": "انضم {name} إلى {project}",
+    "invitePending": "{count, plural, zero {لا توجد دعوات معلّقة} one {دعوة واحدة معلّقة} two {دعوتان معلّقتان} few {# دعوات معلّقة} many {# دعوة معلّقة} other {# دعوة معلّقة}}",
+    "remove": "إزالة من المشروع"
+  },
+  "settings": {
+    "language": "اللغة",
+    "theme": "المظهر",
+    "timezone": "المنطقة الزمنية",
+    "exportLimit": "يتضمن كل تصدير ما يصل إلى 10,000 مهمة."
+  }
+}

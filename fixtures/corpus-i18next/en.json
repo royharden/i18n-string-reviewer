@@ -1,0 +1,26 @@
+{
+  "nav": {
+    "board": "Board",
+    "inbox": "Inbox"
+  },
+  "greeting": "Hello, {{name}}!",
+  "welcomeBack": "Welcome back to TaskBoard, {{name}}",
+  "openBoard": "Open $t(nav.board)",
+  "goToInbox": "Go to $t(nav.inbox)",
+  "taskCount_one": "{{count}} task",
+  "taskCount_other": "{{count}} tasks",
+  "dueIn_one": "Due in {{count}} day",
+  "dueIn_other": "Due in {{count}} days",
+  "newMessages_one": "You have {{count}} new message",
+  "newMessages_other": "You have {{count}} new messages",
+  "attachments_one": "{{count}} attachment",
+  "attachments_other": "{{count}} attachments",
+  "uploadProgress": "Uploaded %1$s of %2$s files",
+  "lastEdit": "Edited by %s on %s",
+  "errorCode": "Request failed: %(reason)s",
+  "retryIn": "Retrying in %{seconds} seconds",
+  "storage": "{{used, number}} MB of {{total, number}} MB used",
+  "joinedRich": "<0>{{name}}</0> joined the board",
+  "deleteColumn": "Delete the column “{{column}}”?",
+  "searchFor": "Search for “{{query}}”"
+}

@@ -1,0 +1,30 @@
+{
+  "nav": {
+    "board": "Tableau",
+    "inbox": "Boîte de réception"
+  },
+  "greeting": "Bonjour, {{name}} !",
+  "welcomeBack": "Bon retour sur TaskBoard, {{name}}",
+  "openBoard": "Ouvrir $t(nav.board)",
+  "goToInbox": "Aller à $t(nav.inbox)",
+  "taskCount_one": "{{count}} tâche",
+  "taskCount_many": "{{count}} de tâches",
+  "taskCount_other": "{{count}} tâches",
+  "dueIn_one": "Échéance dans {{count}} jour",
+  "dueIn_many": "Échéance dans {{count}} de jours",
+  "dueIn_other": "Échéance dans {{count}} jours",
+  "newMessages_one": "Vous avez {{count}} nouveau message",
+  "newMessages_many": "Vous avez {{count}} de nouveaux messages",
+  "newMessages_other": "Vous avez {{count}} nouveaux messages",
+  "attachments_one": "{{count}} pièce jointe",
+  "attachments_many": "{{count}} de pièces jointes",
+  "attachments_other": "{{count}} pièces jointes",
+  "uploadProgress": "%1$s fichiers sur %2$s envoyés",
+  "lastEdit": "Modifié par %s le %s",
+  "errorCode": "Échec de la requête : %(reason)s",
+  "retryIn": "Nouvelle tentative dans %{seconds} secondes",
+  "storage": "{{used, number}} Mo utilisés sur {{total, number}} Mo",
+  "joinedRich": "<0>{{name}}</0> a rejoint le tableau",
+  "deleteColumn": "Supprimer la colonne « {{column}} » ?",
+  "searchFor": "Rechercher « {{query}} »"
+}

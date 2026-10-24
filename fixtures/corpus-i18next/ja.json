@@ -1,0 +1,22 @@
+{
+  "nav": {
+    "board": "ボード",
+    "inbox": "受信トレイ"
+  },
+  "greeting": "こんにちは、{{name}}さん！",
+  "welcomeBack": "TaskBoardへおかえりなさい、{{name}}さん",
+  "openBoard": "$t(nav.board)を開く",
+  "goToInbox": "$t(nav.inbox)へ移動",
+  "taskCount_other": "{{count}}件のタスク",
+  "dueIn_other": "期限まであと{{count}}日",
+  "newMessages_other": "新しいメッセージが{{count}}件あります",
+  "attachments_other": "{{count}}件の添付ファイル",
+  "uploadProgress": "%2$s件中%1$s件のファイルをアップロードしました",
+  "lastEdit": "%sさんが%sに編集",
+  "errorCode": "リクエストに失敗しました：%(reason)s",
+  "retryIn": "%{seconds}秒後に再試行します",
+  "storage": "{{total, number}} MB中{{used, number}} MBを使用中",
+  "joinedRich": "<0>{{name}}</0>さんがボードに参加しました",
+  "deleteColumn": "列「{{column}}」を削除しますか？",
+  "searchFor": "「{{query}}」を検索"
+}

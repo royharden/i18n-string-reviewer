@@ -1,0 +1,31 @@
+[
+  {
+    "term": "TaskBoard",
+    "doNotTranslate": true,
+    "note": "Product brand. Keep in Latin script in every locale, including ru, ar and ja."
+  },
+  {
+    "term": "OK",
+    "doNotTranslate": true,
+    "note": "Product style keeps the Latin \"OK\" button label in every locale."
+  },
+  {
+    "term": "card",
+    "translations": {
+      "fr": "carte",
+      "ru": "карточ",
+      "ar": "بطاق",
+      "ja": "カード"
+    },
+    "note": "A kanban card. Russian and Arabic entries are stems so every inflected form matches."
+  },
+  {
+    "term": "task",
+    "translations": {
+      "fr": "tâche",
+      "ru": "задач",
+      "ja": "タスク"
+    },
+    "note": "A unit of work. Arabic omitted: مهمة / مهام share no common contiguous stem."
+  }
+]

@@ -1,0 +1,152 @@
+{
+  "app": {
+    "name": "TaskBoard",
+    "tagline": "チームで仕事を計画し、進捗を追い、確実に届けましょう。"
+  },
+  "nav": {
+    "dashboard": "ダッシュボード",
+    "projects": "プロジェクト",
+    "inbox": "受信トレイ",
+    "calendar": "カレンダー",
+    "reports": "レポート",
+    "archive": "アーカイブ",
+    "settings": "設定",
+    "help": "ヘルプ"
+  },
+  "actions": {
+    "save": "保存",
+    "cancel": "キャンセル",
+    "delete": "削除",
+    "edit": "編集",
+    "archive": "アーカイブする",
+    "restore": "復元",
+    "duplicate": "複製",
+    "share": "共有",
+    "export": "エクスポート",
+    "open": "開く",
+    "back": "戻る",
+    "ok": "OK",
+    "retry": "再試行"
+  },
+  "dialog": {
+    "close": "閉じる",
+    "unsavedTitle": "保存されていない変更を破棄しますか？",
+    "unsavedBody": "<b>{title}</b> への編集内容は失われます。",
+    "deleteConfirm": "{count, plural, other {#件のタスク}}を削除しますか？この操作は元に戻せません。"
+  },
+  "board": {
+    "title": "ボード",
+    "newColumn": "列を追加",
+    "emptyColumn": "この列にはまだカードがありません。",
+    "cardCount": "{count, plural, other {#枚のカード}}",
+    "filterPlaceholder": "カードを絞り込む",
+    "moveCard": "「{cardTitle}」を{column}に移動しました",
+    "wipLimit": "カードの上限：{limit, number}枚",
+    "autoArchive": "「完了」列のカードは30日後にアーカイブされます。"
+  },
+  "task": {
+    "newTask": "新しいタスク",
+    "titleLabel": "タイトル",
+    "close": "完了にする",
+    "reopen": "再オープン",
+    "watch": "ウォッチ",
+    "lead": "リーダー",
+    "assignedTo": "担当者：{name}",
+    "assignedBy": "{gender, select, female {このタスクがあなたに割り当てられました} male {このタスクがあなたに割り当てられました} other {このタスクがあなたに割り当てられました}}",
+    "dueDate": "期限：{date, date, medium}",
+    "overdue": "{days, plural, other {#日遅れ}}",
+    "commentCount": "{count, plural, =0 {コメントはありません} other {#件のコメント}}",
+    "subtaskProgress": "サブタスク{total, number}件中{done, number}件が完了",
+    "rank": "{place, selectordinal, other {キューの#番目}}",
+    "priority": {
+      "high": "高",
+      "medium": "中",
+      "low": "低"
+    }
+  },
+  "status": {
+    "open": "オープン",
+    "inProgress": "進行中",
+    "blocked": "ブロック中",
+    "done": "完了",
+    "draft": "下書き"
+  },
+  "feed": {
+    "postButton": "投稿する",
+    "postHeading": "投稿",
+    "placeholder": "チームへの最新情報を書きましょう…",
+    "reactions": "{count, plural, other {#件のリアクション}}",
+    "mentioned": "<b>{name}</b>さんが{project}であなたをメンションしました",
+    "edited": "{minutes, plural, other {#分前}}に編集"
+  },
+  "rooms": {
+    "book": "予約する",
+    "available": "空き",
+    "busy": "使用中",
+    "capacity": "{seats, plural, other {定員#名}}"
+  },
+  "library": {
+    "book": "書籍",
+    "handbook": "ハンドブック"
+  },
+  "automation": {
+    "runNow": "実行する",
+    "runHeader": "実行",
+    "lastRun": "前回の実行：{date, date, short} {time, time, short}",
+    "failedRuns": "{count, plural, other {#件の実行が失敗しました}}",
+    "trigger": "カードが{column}に移動したとき"
+  },
+  "search": {
+    "placeholder": "タスク、メンバー、ファイルを検索",
+    "matchCase": "大文字と小文字を区別",
+    "match": "一致条件",
+    "results": "{count, plural, other {#件の一致}}",
+    "noResults": "「{query}」に一致する結果はありません"
+  },
+  "billing": {
+    "planFree": "無料",
+    "save": "年払いで{percent, number, percent}お得",
+    "seats": "{count, plural, other {#席}}",
+    "order": "注文",
+    "total": "お支払い金額：{amount}"
+  },
+  "sort": {
+    "order": "並び順"
+  },
+  "meeting": {
+    "present": "発表する",
+    "attendancePresent": "出席"
+  },
+  "errors": {
+    "network": "サーバーに接続できません。接続を確認して、もう一度お試しください。",
+    "notFound": "このタスクはすでに存在しません。",
+    "permission": "{project}を編集する権限がありません。",
+    "fileTooLarge": "ファイルは{size, number} MB未満にしてください。",
+    "rateLimited": "リクエストが多すぎます。{seconds, plural, other {#秒}}後にもう一度お試しください。",
+    "sessionExpired": "セッションの有効期限が切れました。<link>もう一度サインイン</link>してください。",
+    "conflict": "編集中に{name}さんがこのタスクを変更しました。"
+  },
+  "notifications": {
+    "unread": "{count, plural, =0 {すべて確認済みです} other {未読の通知が#件あります}}",
+    "taskAssigned": "{actor}さんが<b>{taskTitle}</b>をあなたに割り当てました",
+    "dueSoon": "<b>{taskTitle}</b>の期限は明日です"
+  },
+  "onboarding": {
+    "welcome": "TaskBoardへようこそ、{name}さん！",
+    "step": "ステップ{current, number}/{total, number}",
+    "invite": "チームを招待",
+    "learnMore": "ボードは初めてですか？<link>ガイドを読む</link>。"
+  },
+  "members": {
+    "role": "{role, select, owner {オーナー} admin {管理者} member {メンバー} other {ゲスト}}",
+    "joined": "{name}さんが{project}に参加しました",
+    "invitePending": "{count, plural, other {保留中の招待が#件}}",
+    "remove": "プロジェクトから削除"
+  },
+  "settings": {
+    "language": "言語",
+    "theme": "テーマ",
+    "timezone": "タイムゾーン",
+    "exportLimit": "各エクスポートに含まれるタスクは最大10,000件です。"
+  }
+}

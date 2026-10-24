@@ -1,0 +1,171 @@
+{
+  "app.name": {
+    "screen": "Everywhere",
+    "note": "Product brand name. Never translate or transliterate; see glossary."
+  },
+  "nav.archive": {
+    "screen": "Left sidebar navigation",
+    "note": "Noun: the section that lists archived projects and tasks. Not the action of archiving.",
+    "maxLength": 18
+  },
+  "actions.archive": {
+    "screen": "Task detail toolbar",
+    "note": "Verb on a button: move the current task to the archive.",
+    "maxLength": 16
+  },
+  "actions.save": {
+    "screen": "Task editor footer",
+    "note": "Verb on a button: store the edited task. Not about saving money.",
+    "maxLength": 14
+  },
+  "actions.open": {
+    "screen": "File attachment row",
+    "note": "Verb on a button: open the attached file. Not the task status.",
+    "maxLength": 12
+  },
+  "actions.ok": {
+    "screen": "Confirmation dialogs",
+    "note": "Product style keeps Latin \"OK\" in every locale (glossary doNotTranslate).",
+    "maxLength": 6
+  },
+  "dialog.close": {
+    "screen": "Modal dialog header",
+    "note": "Verb on a button: dismiss the dialog without changing anything. Not closing a task.",
+    "maxLength": 12
+  },
+  "board.title": {
+    "screen": "Board view page title",
+    "note": "Noun: a kanban board of columns and cards. Not a board of directors, not a plank.",
+    "maxLength": 20
+  },
+  "board.cardCount": {
+    "screen": "Column header badge",
+    "description": "Number of cards in one kanban column."
+  },
+  "task.close": {
+    "screen": "Task detail toolbar",
+    "note": "Verb on a button: mark the task resolved (finished). Not dismissing a dialog; the task stays visible.",
+    "maxLength": 16
+  },
+  "task.watch": {
+    "screen": "Task detail toolbar",
+    "note": "Verb on a toggle button: subscribe to notifications about this task. Not watching a video.",
+    "maxLength": 14
+  },
+  "task.lead": {
+    "screen": "Task detail sidebar",
+    "note": "Noun: field label for the person who leads the task. Not the metal, not a sales lead.",
+    "maxLength": 18
+  },
+  "task.rank": {
+    "screen": "Task card corner",
+    "description": "Ordinal position of the task in the team's priority queue (1st, 2nd, ...)."
+  },
+  "status.open": {
+    "screen": "Task status pill",
+    "note": "Adjective describing a task (grammatical gender: task). Not a verb.",
+    "maxLength": 14
+  },
+  "status.draft": {
+    "screen": "Task status pill",
+    "note": "Noun/adjective: the task is an unpublished draft. Not the verb \"to draft\", not a current of air.",
+    "maxLength": 14
+  },
+  "feed.postButton": {
+    "screen": "Team feed — comment composer",
+    "note": "Verb on a button: publish the message the user has just written.",
+    "maxLength": 14
+  },
+  "feed.postHeading": {
+    "screen": "Team feed — single post page",
+    "note": "Noun: page heading for one published message. Not the verb \"to post\", not mail.",
+    "maxLength": 20
+  },
+  "rooms.book": {
+    "screen": "Meeting room picker",
+    "note": "Verb on a button: reserve the selected meeting room. Not a book.",
+    "maxLength": 14
+  },
+  "rooms.available": {
+    "screen": "Meeting room picker — availability column",
+    "note": "Adjective: the room is not occupied at that time (feminine if the locale genders \"room\"). Not \"free of charge\".",
+    "maxLength": 12
+  },
+  "rooms.busy": {
+    "screen": "Meeting room picker — availability column",
+    "note": "Adjective: the room is occupied at that time.",
+    "maxLength": 12
+  },
+  "library.book": {
+    "screen": "Knowledge base — document type filter",
+    "note": "Noun: a long-form document type in the knowledge base. Not the verb \"to reserve\".",
+    "maxLength": 14
+  },
+  "automation.runNow": {
+    "screen": "Automation rule detail",
+    "note": "Verb on a button: execute this automation rule now.",
+    "maxLength": 14
+  },
+  "automation.runHeader": {
+    "screen": "Automation history table",
+    "note": "Noun: column header; each row is one execution of the rule. Not a verb, not jogging.",
+    "maxLength": 20
+  },
+  "search.matchCase": {
+    "screen": "Search options",
+    "note": "Checkbox label: make the search case-sensitive.",
+    "maxLength": 32
+  },
+  "search.match": {
+    "screen": "Automation rule editor — conditions",
+    "note": "Verb label shown before a dropdown: \"Match [all | any] of the following conditions\". Not a sports match, not a matchstick.",
+    "maxLength": 16
+  },
+  "search.results": {
+    "screen": "Search results header",
+    "description": "Number of search hits (noun \"match\" = a hit), not a sports match."
+  },
+  "billing.planFree": {
+    "screen": "Pricing page — plan name",
+    "note": "Adjective: costs nothing. Not \"available\" or \"unoccupied\".",
+    "maxLength": 14
+  },
+  "billing.save": {
+    "screen": "Pricing page — yearly toggle",
+    "note": "Verb: spend less money (discount). Not storing data.",
+    "maxLength": 72
+  },
+  "billing.order": {
+    "screen": "Invoices table",
+    "note": "Noun: column header for the purchase order. Not a sort order, not a command.",
+    "maxLength": 18
+  },
+  "sort.order": {
+    "screen": "Board toolbar — sort menu",
+    "note": "Noun: the sort order of cards (ascending/descending). Not a purchase order.",
+    "maxLength": 16
+  },
+  "meeting.present": {
+    "screen": "Meeting room — call controls",
+    "note": "Verb on a button: start presenting your screen. Not attendance, not a gift.",
+    "maxLength": 22
+  },
+  "meeting.attendancePresent": {
+    "screen": "Meeting attendance list",
+    "note": "Adjective: the attendee is here. Not the verb \"to present\", not a gift.",
+    "maxLength": 14
+  },
+  "settings.theme": {
+    "screen": "Settings — appearance",
+    "note": "Noun: visual appearance / colour scheme of the app. Not a topic or subject.",
+    "maxLength": 14
+  },
+  "errors.sessionExpired": {
+    "screen": "Session banner",
+    "note": "<link> wraps a sign-in link; keep the tag pair."
+  },
+  "onboarding.welcome": {
+    "screen": "First-run welcome dialog",
+    "note": "Keep the brand TaskBoard as is."
+  }
+}

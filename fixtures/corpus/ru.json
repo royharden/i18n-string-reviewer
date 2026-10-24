@@ -1,0 +1,152 @@
+{
+  "app": {
+    "name": "TaskBoard",
+    "tagline": "Планируйте, отслеживайте и доводите работу до результата вместе с командой."
+  },
+  "nav": {
+    "dashboard": "Панель управления",
+    "projects": "Проекты",
+    "inbox": "Входящие",
+    "calendar": "Календарь",
+    "reports": "Отчёты",
+    "archive": "Архив",
+    "settings": "Настройки",
+    "help": "Справка"
+  },
+  "actions": {
+    "save": "Сохранить",
+    "cancel": "Отмена",
+    "delete": "Удалить",
+    "edit": "Изменить",
+    "archive": "Архивировать",
+    "restore": "Восстановить",
+    "duplicate": "Дублировать",
+    "share": "Поделиться",
+    "export": "Экспортировать",
+    "open": "Открыть",
+    "back": "Назад",
+    "ok": "OK",
+    "retry": "Повторить"
+  },
+  "dialog": {
+    "close": "Закрыть",
+    "unsavedTitle": "Отменить несохранённые изменения?",
+    "unsavedBody": "Ваши правки в <b>{title}</b> будут потеряны.",
+    "deleteConfirm": "Удалить {count, plural, one {# задачу} few {# задачи} many {# задач} other {# задачи}}? Это действие нельзя отменить."
+  },
+  "board": {
+    "title": "Доска",
+    "newColumn": "Добавить столбец",
+    "emptyColumn": "В этом столбце пока нет карточек.",
+    "cardCount": "{count, plural, one {# карточка} few {# карточки} many {# карточек} other {# карточки}}",
+    "filterPlaceholder": "Фильтр карточек",
+    "moveCard": "Карточка «{cardTitle}» перемещена в {column}",
+    "wipLimit": "Лимит карточек: {limit, number}",
+    "autoArchive": "Карточки из столбца «Готово» архивируются через 30 дней."
+  },
+  "task": {
+    "newTask": "Новая задача",
+    "titleLabel": "Название",
+    "close": "Завершить",
+    "reopen": "Открыть снова",
+    "watch": "Следить",
+    "lead": "Руководитель",
+    "assignedTo": "Исполнитель: {name}",
+    "assignedBy": "{gender, select, female {Она назначила вам эту задачу} male {Он назначил вам эту задачу} other {Вам назначили эту задачу}}",
+    "dueDate": "Срок: {date, date, medium}",
+    "overdue": "{days, plural, one {Просрочено на # день} few {Просрочено на # дня} many {Просрочено на # дней} other {Просрочено на # дня}}",
+    "commentCount": "{count, plural, =0 {Нет комментариев} one {# комментарий} few {# комментария} many {# комментариев} other {# комментария}}",
+    "subtaskProgress": "Выполнено подзадач: {done, number} из {total, number}",
+    "rank": "{place, selectordinal, other {#-я в очереди}}",
+    "priority": {
+      "high": "Высокий",
+      "medium": "Средний",
+      "low": "Низкий"
+    }
+  },
+  "status": {
+    "open": "Открыта",
+    "inProgress": "В работе",
+    "blocked": "Заблокирована",
+    "done": "Готово",
+    "draft": "Черновик"
+  },
+  "feed": {
+    "postButton": "Опубликовать",
+    "postHeading": "Публикация",
+    "placeholder": "Напишите новость для команды…",
+    "reactions": "{count, plural, one {# реакция} few {# реакции} many {# реакций} other {# реакции}}",
+    "mentioned": "<b>{name}</b> упоминает вас в проекте {project}",
+    "edited": "Изменено {minutes, plural, one {# минуту назад} few {# минуты назад} many {# минут назад} other {# минуты назад}}"
+  },
+  "rooms": {
+    "book": "Забронировать",
+    "available": "Свободна",
+    "busy": "Занята",
+    "capacity": "{seats, plural, one {Вмещает # человека} few {Вмещает # человек} many {Вмещает # человек} other {Вмещает # человека}}"
+  },
+  "library": {
+    "book": "Книга",
+    "handbook": "Руководство"
+  },
+  "automation": {
+    "runNow": "Запустить",
+    "runHeader": "Запуск",
+    "lastRun": "Последний запуск: {date, date, short} в {time, time, short}",
+    "failedRuns": "{count, plural, one {# запуск завершился с ошибкой} few {# запуска завершились с ошибкой} many {# запусков завершились с ошибкой} other {# запуска завершились с ошибкой}}",
+    "trigger": "Когда карточка перемещается в {column}"
+  },
+  "search": {
+    "placeholder": "Поиск задач, людей и файлов",
+    "matchCase": "Учитывать регистр",
+    "match": "Соответствует",
+    "results": "{count, plural, one {# совпадение} few {# совпадения} many {# совпадений} other {# совпадения}}",
+    "noResults": "По запросу «{query}» ничего не найдено"
+  },
+  "billing": {
+    "planFree": "Бесплатно",
+    "save": "Сэкономьте {percent, number, percent} при оплате за год",
+    "seats": "{count, plural, one {# место} few {# места} many {# мест} other {# места}}",
+    "order": "Заказ",
+    "total": "К оплате: {amount}"
+  },
+  "sort": {
+    "order": "Порядок"
+  },
+  "meeting": {
+    "present": "Начать презентацию",
+    "attendancePresent": "Присутствует"
+  },
+  "errors": {
+    "network": "Не удаётся подключиться к серверу. Проверьте соединение и повторите попытку.",
+    "notFound": "Эта задача больше не существует.",
+    "permission": "У вас нет прав на изменение проекта {project}.",
+    "fileTooLarge": "Размер файла не должен превышать {size, number} МБ.",
+    "rateLimited": "Слишком много запросов. Повторите попытку через {seconds, plural, one {# секунду} few {# секунды} many {# секунд} other {# секунды}}.",
+    "sessionExpired": "Сеанс истёк. <link>Войдите снова</link>",
+    "conflict": "Пока вы редактировали эту задачу, её изменил пользователь {name}."
+  },
+  "notifications": {
+    "unread": "{count, plural, =0 {Новых уведомлений нет} one {# непрочитанное уведомление} few {# непрочитанных уведомления} many {# непрочитанных уведомлений} other {# непрочитанного уведомления}}",
+    "taskAssigned": "{actor} назначает вам задачу <b>{taskTitle}</b>",
+    "dueSoon": "Срок задачи <b>{taskTitle}</b> истекает завтра"
+  },
+  "onboarding": {
+    "welcome": "Добро пожаловать в TaskBoard, {name}!",
+    "step": "Шаг {current, number} из {total, number}",
+    "invite": "Пригласите команду",
+    "learnMore": "Впервые работаете с досками? <link>Прочитайте руководство</link>."
+  },
+  "members": {
+    "role": "{role, select, owner {Владелец} admin {Администратор} member {Участник} other {Гость}}",
+    "joined": "Пользователь {name} присоединился к проекту {project}",
+    "invitePending": "{count, plural, one {# приглашение ожидает ответа} few {# приглашения ожидают ответа} many {# приглашений ожидают ответа} other {# приглашения ожидают ответа}}",
+    "remove": "Удалить из проекта"
+  },
+  "settings": {
+    "language": "Язык",
+    "theme": "Тема",
+    "timezone": "Часовой пояс",
+    "exportLimit": "Каждый экспорт содержит до 10 000 задач."
+  }
+}
