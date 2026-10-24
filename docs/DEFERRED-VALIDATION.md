@@ -149,3 +149,15 @@ Runtime dependency/parser behavior and UI execution remain unverified; only sour
 JSON parsing and TypeScript syntax parsing are authorized in this rework.
 
 Rework author: 0685_Codex_GPT-61Sol_Sub_S34-M3-Rework (GPT-6.1 Sol, xhigh).
+
+## M4 construction — activation boundary
+
+Source work adds accounting/provider/function and authenticated preview/UI integrations; all behavior remains unexecuted. After D1/D2, run the written handler/drift/callledger regression sources, then follow D7–D11 on an explicitly authorized isolated backend. Confirm `reserve_budget` created=false for duplicate attempts (including in-flight reserved), no second provider dispatch/reconcile, daily concurrency limits, own-day midnight settlement and overrun fault. Verify preview auth/allowlist/redaction and that preview never creates an admin/budget/provider operation; stale estimate hash must fail before reservation.
+
+D14 must confirm the configured backend origin survives the CSP transformation in a production build, development-only CSP exceptions remain development-only, OTP/session/signout work, transfer notice precedes preview, fresh paid confirmation binds actual prepared scope/hash, edits never auto-trigger paid review, cancellation/error returns usable partial results, and old rulings become invalid after text changes. No build/browser is run in Dirty Mode.
+
+D17 lock recovery: exclusive `eval.lock` is never automatically removed on suspicion of staleness. After a crash, an operator first verifies no live owner exists, then performs explicit recovery before resuming; acquired-session journal recovery marks prior reserved rows unknown and charges them in full. Node maxUsd is cumulative for the persistent journal across midnight; a deliberately chosen fresh cacheDir denotes a separate run. Validate Windows/OneDrive atomic rename and concurrent-session refusal after activation.
+
+### M4 exact accounting validation commands (not run)
+
+On an explicitly authorized fresh disposable database, apply the two migrations in order, then run `psql --no-psqlrc --set ON_ERROR_STOP=1 --file supabase/tests/budget_concurrency.sql` as the appropriate database owner. The single-session scenario fixtures roll back and do not prove concurrency. On a separate fresh disposable target, set `BUDGET_TEST_DATABASE_URL` without committing its value, then run `node supabase/tests/budget_concurrency.mjs --disposable`; this driver commits synthetic fixtures, deletes nothing and coordinates twenty independent connections. Verify near-cap behavior, duplicate ownership and single-refund settlement. Neither SQL nor driver has executed. After D1, run `npm test -- tests/callledger/budget.test.ts`; validate Windows/OneDrive rename/fsync/wx lock behavior separately.

@@ -264,6 +264,41 @@ export interface PipelineResult {
   readonly reviewer: string | null;
 }
 
+export interface PreparedPipeline {
+  /** Deterministic findings plus the exact local text/restore records; never send this object. */
+  readonly base: PipelineResult;
+  /** Frozen batches. Only record.mask.masked may cross a reviewer transport. */
+  readonly batches: readonly (readonly ReviewItemRecord[])[];
+  readonly scope: ReviewScope;
+}
+
+export interface PipelineProgress {
+  readonly completedBatches: number;
+  readonly totalBatches: number;
+}
+
+export interface PreparedRunOptions {
+  readonly reviewer: Reviewer;
+  readonly reviewOptions?: ReviewOptions;
+  /** Checked before each batch; an in-flight call finishes and is retained. */
+  readonly shouldCancel?: () => boolean;
+  readonly onProgress?: (progress: PipelineProgress) => void;
+}
+
+export interface PipelineExecutionResult extends PipelineResult, PipelineProgress {
+  readonly completion: 'complete' | 'cancelled' | 'error';
+  /** Caller-facing error, never interpreted as a successful/mock run. */
+  readonly error?: string;
+}
+
+function freezePlain<T>(value: T): T {
+  if (value !== null && typeof value === 'object' && !Object.isFrozen(value)) {
+    for (const child of Object.values(value)) freezePlain(child);
+    Object.freeze(value);
+  }
+  return value;
+}
+
 function emptyDrops(): Record<DropReason, number> {
   return { malformed_reply: 0, schema: 0, not_in_batch: 0, key_mismatch: 0, locale_mismatch: 0 };
 }
@@ -343,7 +378,7 @@ export async function reviewBatch(
   };
 }
 
-export async function runPipeline(imp: ImportResult, opts: PipelineOptions = {}): Promise<PipelineResult> {
+export async function preparePipeline(imp: ImportResult, opts: Pick<PipelineOptions, 'scope' | 'batchSize'> = {}): Promise<PreparedPipeline> {
   const { source } = imp;
   const batchSize = Math.min(MAX_BATCH_SIZE, Math.max(1, opts.batchSize ?? MAX_BATCH_SIZE));
   const checks = runAllChecks(source, imp.targets, { context: imp.context, glossary: imp.glossary });
@@ -412,23 +447,17 @@ export async function runPipeline(imp: ImportResult, opts: PipelineOptions = {})
   // Model review.
   const gate = createGateStats();
   const dropReasons = emptyDrops();
-  let dropped = 0;
-  let duplicateFindings = 0;
-  let batches = 0;
+  const preparedBatches: Array<readonly ReviewItemRecord[]> = [];
   const rejections: GateRejection[] = [];
   const invariant: InvariantRecord[] = [];
   const items = new Map<string, ReviewItemRecord>();
   const files: FileSummary[] = [];
-  const scope = opts.scope ?? {};
+  const scope: ReviewScope = freezePlain({ ...opts.scope, ...(opts.scope?.locales ? { locales: [...opts.scope.locales] } : {}), ...(opts.scope?.keyPrefix ? { keyPrefix: [...opts.scope.keyPrefix] } : {}) });
 
   for (let ti = 0; ti < imp.targets.length; ti++) {
     const doc = imp.targets[ti]!;
     const ids = itemIds[ti]!;
     const exportEligible = !doc.rejected && doc.eligible.export && !source.rejected && source.eligible.export && doc.dialect === source.dialect;
-    if (!opts.reviewer) {
-      files.push({ fileName: doc.fileName, locale: doc.locale, reviewed: false, reason: 'deterministic checks only', exportEligible, reviewedItems: 0 });
-      continue;
-    }
     if (doc.rejected || !doc.eligible.review || source.rejected || !source.eligible.review || doc.dialect !== source.dialect) {
       files.push({ fileName: doc.fileName, locale: doc.locale, reviewed: false, reason: 'not eligible for model review (import errors)', exportEligible, reviewedItems: 0 });
       continue;
@@ -473,25 +502,15 @@ export async function runPipeline(imp: ImportResult, opts: PipelineOptions = {})
         mask,
         ...(ctxEntry?.maxLength !== undefined ? { maxLength: ctxEntry.maxLength } : {}),
       };
-      records.push(rec);
-      items.set(itemId, rec);
+      freezePlain(mask.masked);
+      const frozen = Object.freeze({ ...rec, key: Object.freeze([...rec.key]) });
+      records.push(frozen);
+      items.set(itemId, frozen);
     }
     for (let i = 0; i < records.length; i += batchSize) {
-      const batch = records.slice(i, i + batchSize);
-      batches++;
-      const r = await reviewBatch(batch, opts.reviewer, opts.reviewOptions ?? {});
-      mergeGateStats(gate, r.gate);
-      dropped += r.dropped;
-      for (const k of Object.keys(r.dropReasons) as DropReason[]) dropReasons[k] += r.dropReasons[k];
-      rejections.push(...r.rejections);
-      invariant.push(...r.invariant);
-      for (const f of r.findings) {
-        const rec = items.get(f.itemId);
-        if (!rec) continue;
-        if (!addFinding(f, { fileName: rec.fileName, sourceText: rec.sourceText, targetText: rec.targetText, targetPresent: true })) duplicateFindings++;
-      }
+      preparedBatches.push(Object.freeze(records.slice(i, i + batchSize)));
     }
-    files.push({ fileName: doc.fileName, locale: doc.locale, reviewed: true, exportEligible, reviewedItems: records.length });
+    files.push({ fileName: doc.fileName, locale: doc.locale, reviewed: false, reason: 'not reviewed yet', exportEligible, reviewedItems: 0 });
   }
 
   const findings = sortFindingsForReview([...byId.values()]);
@@ -501,14 +520,14 @@ export async function runPipeline(imp: ImportResult, opts: PipelineOptions = {})
     if (t) fingerprints.set(f.id, await fingerprintForFinding(f, t.sourceText, t.targetText));
   }
 
-  return {
+  const base: PipelineResult = {
     sourceFindings,
     findings,
     rejections,
     gate,
-    dropped,
+    dropped: 0,
     dropReasons,
-    duplicateFindings,
+    duplicateFindings: 0,
     invariantViolations: invariant,
     items,
     texts,
@@ -516,9 +535,71 @@ export async function runPipeline(imp: ImportResult, opts: PipelineOptions = {})
     knownStrings,
     ruleCounts,
     files,
-    batches,
-    reviewer: opts.reviewer?.id ?? null,
+    batches: 0,
+    reviewer: null,
   };
+  return Object.freeze({ base, batches: Object.freeze(preparedBatches), scope });
+}
+
+/** Execute exactly the prepared batches, sequentially. A failure/cancel preserves every completed batch. */
+export async function runPreparedPipeline(prepared: PreparedPipeline, opts: PreparedRunOptions): Promise<PipelineExecutionResult> {
+  const { base } = prepared;
+  const byId = new Map(base.findings.map((finding) => [finding.id, finding]));
+  const texts = new Map(base.texts);
+  const fingerprints = new Map(base.fingerprints);
+  const gate = createGateStats();
+  const dropReasons = emptyDrops();
+  const rejections: GateRejection[] = [];
+  const invariant: InvariantRecord[] = [];
+  const reviewedItems = new Map<string, number>();
+  let dropped = 0;
+  let duplicateFindings = 0;
+  let completedBatches = 0;
+  let completion: PipelineExecutionResult['completion'] = 'complete';
+  let error: string | undefined;
+  for (const batch of prepared.batches) {
+    if (opts.shouldCancel?.()) { completion = 'cancelled'; break; }
+    try {
+      const reviewed = await reviewBatch(batch, opts.reviewer, opts.reviewOptions ?? {});
+      mergeGateStats(gate, reviewed.gate);
+      dropped += reviewed.dropped;
+      for (const reason of Object.keys(reviewed.dropReasons) as DropReason[]) dropReasons[reason] += reviewed.dropReasons[reason];
+      rejections.push(...reviewed.rejections);
+      invariant.push(...reviewed.invariant);
+      for (const finding of reviewed.findings) {
+        const record = base.items.get(finding.itemId);
+        if (!record) continue;
+        if (byId.has(finding.id)) { duplicateFindings++; continue; }
+        const fingerprint = await fingerprintForFinding(finding, record.sourceText, record.targetText);
+        byId.set(finding.id, finding);
+        texts.set(finding.id, { fileName: record.fileName, sourceText: record.sourceText, targetText: record.targetText, targetPresent: true });
+        fingerprints.set(finding.id, fingerprint);
+      }
+      for (const record of batch) reviewedItems.set(record.fileName, (reviewedItems.get(record.fileName) ?? 0) + 1);
+      completedBatches++;
+      opts.onProgress?.({ completedBatches, totalBatches: prepared.batches.length });
+    } catch (cause) {
+      completion = 'error';
+      error = cause instanceof Error ? cause.message : 'Reviewer execution failed.';
+      break;
+    }
+  }
+  const files = base.files.map((file): FileSummary => {
+    if (file.reason !== 'not reviewed yet') return file;
+    const planned = prepared.batches.flat().filter((record) => record.fileName === file.fileName).length;
+    const count = reviewedItems.get(file.fileName) ?? 0;
+    return { ...file, reviewed: count === planned, reviewedItems: count, ...(count === planned ? { reason: undefined } : { reason: `${completion}: reviewed ${count} of ${planned} planned strings` }) };
+  });
+  return { ...base, findings: sortFindingsForReview([...byId.values()]), texts, fingerprints, files, gate, rejections, invariantViolations: invariant, dropped, dropReasons, duplicateFindings, reviewer: opts.reviewer.id, batches: completedBatches, completedBatches, totalBatches: prepared.batches.length, completion, ...(error ? { error } : {}) };
+}
+
+/** Legacy entry point: deterministic-only by default; reviewer failures still reject. */
+export async function runPipeline(imp: ImportResult, opts: PipelineOptions = {}): Promise<PipelineResult> {
+  const prepared = await preparePipeline(imp, opts);
+  if (!opts.reviewer) return { ...prepared.base, items: new Map(), files: prepared.base.files.map((file) => ({ ...file, reviewed: false, reason: 'deterministic checks only' })) };
+  const result = await runPreparedPipeline(prepared, { reviewer: opts.reviewer, ...(opts.reviewOptions ? { reviewOptions: opts.reviewOptions } : {}) });
+  if (result.completion === 'error') throw new Error(result.error ?? 'Reviewer execution failed.');
+  return result;
 }
 
 // --- summary (scripts/demo.ts and the demo snapshot test print / compare the same text) ---
