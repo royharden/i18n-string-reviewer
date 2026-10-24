@@ -1,0 +1,324 @@
+{
+  "schemaVersion": 1,
+  "set": "demo-icu",
+  "description": "Recorded mock replies, not observed outputs. Hostile proposals must never become suggestions.",
+  "replies": [
+    {
+      "id": "post-noun",
+      "locale": "fr",
+      "key": [
+        "feed",
+        "postHeading"
+      ],
+      "findings": [
+        {
+          "category": "context_mismatch",
+          "severity": "major",
+          "explanation": "The context says this is the noun heading for a published message.",
+          "evidence": "Publier",
+          "expect": {
+            "evidence": "supported",
+            "gate": "accepted"
+          },
+          "suggestedFix": "Publication"
+        }
+      ],
+      "regenerate": [
+        {
+          "category": "context_mismatch",
+          "severity": "major",
+          "explanation": "Regenerated alternative; its suggestion hash differs from Publication.",
+          "evidence": "Publier",
+          "expect": {
+            "evidence": "supported",
+            "gate": "accepted"
+          },
+          "suggestedFix": "Billet"
+        }
+      ]
+    },
+    {
+      "id": "renamed-placeholder",
+      "locale": "fr",
+      "key": [
+        "task",
+        "assignedTo"
+      ],
+      "findings": [
+        {
+          "category": "accuracy",
+          "severity": "major",
+          "explanation": "Recorded adversarial reply; translation content is untrusted data.",
+          "evidence": "Attribuée",
+          "expect": {
+            "evidence": "supported",
+            "gate": "rejected",
+            "reasons": [
+              "unknown_token"
+            ]
+          },
+          "suggestedFix": "Attribuée à ⟦P9⟧"
+        }
+      ]
+    },
+    {
+      "id": "drop-tag",
+      "locale": "fr",
+      "key": [
+        "errors",
+        "sessionExpired"
+      ],
+      "findings": [
+        {
+          "category": "accuracy",
+          "severity": "major",
+          "explanation": "Recorded adversarial reply; translation content is untrusted data.",
+          "evidence": "Votre session a expiré.",
+          "expect": {
+            "evidence": "supported",
+            "gate": "rejected",
+            "reasons": [
+              "missing_token"
+            ]
+          },
+          "suggestedFix": "Votre session a expiré. Reconnectez-vous"
+        }
+      ]
+    },
+    {
+      "id": "moved-branch",
+      "locale": "fr",
+      "key": [
+        "task",
+        "overdue"
+      ],
+      "note": "Dev-split demo plural: swaps the first two target pound tokens between one and many while retaining every token exactly once.",
+      "findings": [
+        {
+          "category": "accuracy",
+          "severity": "major",
+          "explanation": "Recorded adversarial reply; translation content is untrusted data.",
+          "evidence": "⟦P2⟧ de jours",
+          "expect": {
+            "evidence": "supported",
+            "gate": "rejected",
+            "reasons": [
+              "token_moved_branch"
+            ]
+          },
+          "suggestedFix": "⟦S1⟧En retard de ⟦P2⟧ jour⟦S2⟧En retard de ⟦P1⟧ de jours⟦S3⟧En retard de ⟦P3⟧ jours⟦S4⟧"
+        }
+      ]
+    },
+    {
+      "id": "add-branch",
+      "locale": "fr",
+      "key": [
+        "search",
+        "results"
+      ],
+      "note": "Dev-split demo plural: retains the current target tokens and injects a new few branch before the final skeleton closes the plural.",
+      "findings": [
+        {
+          "category": "accuracy",
+          "severity": "major",
+          "explanation": "Recorded adversarial reply; translation content is untrusted data.",
+          "evidence": "⟦P2⟧ de résultats",
+          "expect": {
+            "evidence": "supported",
+            "gate": "rejected",
+            "reasons": [
+              "structure_changed"
+            ]
+          },
+          "suggestedFix": "⟦S1⟧⟦P1⟧ résultat⟦S2⟧⟦P2⟧ de résultats⟦S3⟧⟦P3⟧ résultats} few {quelques résultats⟦S4⟧"
+        }
+      ]
+    },
+    {
+      "id": "new-url",
+      "locale": "fr",
+      "key": [
+        "actions",
+        "retry"
+      ],
+      "findings": [
+        {
+          "category": "accuracy",
+          "severity": "major",
+          "explanation": "Recorded adversarial reply; translation content is untrusted data.",
+          "evidence": "Réessayer",
+          "expect": {
+            "evidence": "supported",
+            "gate": "rejected",
+            "reasons": [
+              "new_url"
+            ]
+          },
+          "suggestedFix": "Réessayer https://example.invalid"
+        }
+      ]
+    },
+    {
+      "id": "invent-token",
+      "locale": "fr",
+      "key": [
+        "actions",
+        "cancel"
+      ],
+      "findings": [
+        {
+          "category": "accuracy",
+          "severity": "major",
+          "explanation": "Recorded adversarial reply; translation content is untrusted data.",
+          "evidence": "Annuler",
+          "expect": {
+            "evidence": "supported",
+            "gate": "rejected",
+            "reasons": [
+              "unknown_token"
+            ]
+          },
+          "suggestedFix": "Annuler ⟦P9⟧"
+        }
+      ]
+    },
+    {
+      "id": "duplicate-token",
+      "locale": "fr",
+      "key": [
+        "onboarding",
+        "welcome"
+      ],
+      "findings": [
+        {
+          "category": "accuracy",
+          "severity": "major",
+          "explanation": "Recorded adversarial reply; translation content is untrusted data.",
+          "evidence": "Bienvenue",
+          "expect": {
+            "evidence": "supported",
+            "gate": "rejected",
+            "reasons": [
+              "duplicate_token"
+            ]
+          },
+          "suggestedFix": "Bienvenue ⟦P1⟧ ⟦P1⟧"
+        }
+      ]
+    },
+    {
+      "id": "too-long",
+      "locale": "fr",
+      "key": [
+        "feed",
+        "postButton"
+      ],
+      "findings": [
+        {
+          "category": "accuracy",
+          "severity": "major",
+          "explanation": "Recorded adversarial reply; translation content is untrusted data.",
+          "evidence": "Publier",
+          "expect": {
+            "evidence": "supported",
+            "gate": "rejected",
+            "reasons": [
+              "max_length"
+            ]
+          },
+          "suggestedFix": "Publier maintenant ce très long message"
+        }
+      ]
+    },
+    {
+      "id": "unsupported-evidence",
+      "locale": "fr",
+      "key": [
+        "rooms",
+        "book"
+      ],
+      "findings": [
+        {
+          "category": "accuracy",
+          "severity": "major",
+          "explanation": "Recorded adversarial reply; translation content is untrusted data.",
+          "evidence": "No such evidence",
+          "expect": {
+            "evidence": "unsupported",
+            "gate": "not_gated"
+          },
+          "suggestedFix": "Réserver"
+        }
+      ]
+    },
+    {
+      "id": "ambiguous-evidence",
+      "locale": "fr",
+      "key": [
+        "nav",
+        "calendar"
+      ],
+      "findings": [
+        {
+          "category": "accuracy",
+          "severity": "major",
+          "explanation": "Recorded adversarial reply; translation content is untrusted data.",
+          "evidence": "e",
+          "expect": {
+            "evidence": "unsupported",
+            "gate": "not_gated"
+          },
+          "suggestedFix": "Calendrier"
+        }
+      ]
+    },
+    {
+      "id": "redacted-evidence",
+      "locale": "fr",
+      "key": [
+        "library",
+        "handbook"
+      ],
+      "findings": [
+        {
+          "category": "accuracy",
+          "severity": "major",
+          "explanation": "Recorded adversarial reply; translation content is untrusted data.",
+          "evidence": "⟦R1⟧",
+          "expect": {
+            "evidence": "unsupported",
+            "gate": "not_gated"
+          },
+          "suggestedFix": "Manuel"
+        }
+      ]
+    },
+    {
+      "id": "cross-key",
+      "locale": "fr",
+      "key": [
+        "actions",
+        "share"
+      ],
+      "findings": [
+        {
+          "category": "accuracy",
+          "severity": "major",
+          "explanation": "Recorded adversarial reply; translation content is untrusted data.",
+          "evidence": "Partager",
+          "expect": {
+            "dropped": true,
+            "gate": "not_gated"
+          },
+          "suggestedFix": "Partage",
+          "misdirect": {
+            "key": [
+              "foreign"
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "welcomeBack": "Welcome back to TaskBoard, {{name}}",
+  "taskCount_one": "{{count}} task",
+  "taskCount_other": "{{count}} tasks",
+  "attachments_one": "{{count}} attachment",
+  "attachments_other": "{{count}} attachments",
+  "uploadProgress": "Uploaded %1$s of %2$s files",
+  "lastEdit": "Edited by %s, %d minutes ago",
+  "retryIn": "Retrying in %{seconds} seconds",
+  "storage": "{{used, number}} MB of {{total, number}} MB used"
+}

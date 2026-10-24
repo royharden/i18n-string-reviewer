@@ -1,0 +1,110 @@
+{
+  "app": {
+    "tagline": "Plan, track and ship work with your team."
+  },
+  "nav": {
+    "dashboard": "Dashboard",
+    "calendar": "Calendar",
+    "archive": "Archive",
+    "settings": "Settings",
+    "help": "Help"
+  },
+  "actions": {
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "duplicate": "Duplicate",
+    "share": "Share",
+    "export": "Export",
+    "open": "Open",
+    "back": "Back",
+    "ok": "OK",
+    "retry": "Try again"
+  },
+  "dialog": {
+    "close": "Close",
+    "deleteConfirm": "Delete {count, plural, one {# task} other {# tasks}}? This cannot be undone."
+  },
+  "board": {
+    "filterPlaceholder": "Filter cards",
+    "moveCard": "Moved “{cardTitle}” to {column}",
+    "wipLimit": "Limit: {limit, number} cards"
+  },
+  "task": {
+    "titleLabel": "Title",
+    "reopen": "Reopen",
+    "watch": "Watch",
+    "assignedTo": "Assigned to {name}",
+    "assignedBy": "{gender, select, female {She assigned you this task} male {He assigned you this task} other {They assigned you this task}}",
+    "overdue": "{days, plural, one {Overdue by # day} other {Overdue by # days}}",
+    "commentCount": "{count, plural, =0 {No comments} one {# comment} other {# comments}}",
+    "subtaskProgress": "{done, number} of {total, number} subtasks done",
+    "rank": "{place, selectordinal, one {#st in the queue} two {#nd in the queue} few {#rd in the queue} other {#th in the queue}}",
+    "priority": {
+      "high": "High",
+      "medium": "Medium",
+      "low": "Low"
+    }
+  },
+  "status": {
+    "blocked": "Blocked",
+    "done": "Done",
+    "draft": "Draft"
+  },
+  "feed": {
+    "postButton": "Post",
+    "postHeading": "Post",
+    "edited": "Edited {minutes, plural, one {# minute ago} other {# minutes ago}}"
+  },
+  "rooms": {
+    "book": "Book",
+    "available": "Free",
+    "busy": "Busy"
+  },
+  "library": {
+    "book": "Book",
+    "handbook": "Handbook"
+  },
+  "automation": {
+    "lastRun": "Last run {date, date, short} at {time, time, short}",
+    "trigger": "When a card moves to {column}"
+  },
+  "search": {
+    "matchCase": "Match case",
+    "match": "Match",
+    "results": "{count, plural, one {# match} other {# matches}}"
+  },
+  "billing": {
+    "seats": "{count, plural, one {# seat} other {# seats}}"
+  },
+  "sort": {
+    "order": "Order"
+  },
+  "meeting": {
+    "attendancePresent": "Present"
+  },
+  "errors": {
+    "network": "Can't reach the server. Check your connection and try again.",
+    "notFound": "This task no longer exists.",
+    "permission": "You don't have permission to edit {project}.",
+    "fileTooLarge": "Files must be smaller than {size, number} MB.",
+    "rateLimited": "Too many requests. Try again in {seconds, plural, one {# second} other {# seconds}}.",
+    "sessionExpired": "Your session expired. <link>Sign in again</link>"
+  },
+  "notifications": {
+    "taskAssigned": "{actor} assigned <b>{taskTitle}</b> to you",
+    "dueSoon": "<b>{taskTitle}</b> is due tomorrow"
+  },
+  "onboarding": {
+    "welcome": "Welcome to TaskBoard, {name}!",
+    "invite": "Invite your team"
+  },
+  "members": {
+    "role": "{role, select, owner {Owner} admin {Admin} member {Member} other {Guest}}",
+    "remove": "Remove from project"
+  },
+  "settings": {
+    "language": "Language",
+    "timezone": "Time zone",
+    "exportLimit": "Each export includes up to 10,000 tasks."
+  }
+}

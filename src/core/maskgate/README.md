@@ -1,0 +1,9 @@
+# Masking and fix gate
+
+`maskItem` masks every model-visible field in one span pass per original field. Secrets take priority over literal delimiters, then structure. Generated tokens are never rescanned. `P` placeholders, `T` tags, and `S` ICU skeletons enter the structural legend. `L` tokens preserve literal brackets. `R` redactions never enter legends or token restore maps. Redacted fields have an empty `RestoreMap.original`; nonredacted fields keep their exact original for current-target binding. The local import and pipeline records retain original product text; only `MaskedItem` is sent to a reviewer.
+
+Any field redaction, nested plural/select, degraded skeleton or empty source disables fixes. Source and target token numbers are field-local; proposals must use target tokens. A literal `⟦R1⟧` is represented by `L` delimiter tokens and remains ordinary data alongside a real redaction.
+
+`validateFix(currentTarget, proposalMasked, restore, ctx, stats?)` rederives the current target mask and checks restore binding, token counts/identities/branch membership, unmasking, reparsing, exact ICU paths (including `#`), placeholders, unindexed printf order, tag tree/href, added URLs and length. Reasons are collected in `GATE_REASONS` order and each rejection increments every emitted reason once. `maxLength` is authoritative; otherwise the whole unmasked string must fit `floor(1.6 × source code points)`. This differs from the deterministic rendered-length warning.
+
+The gate returns text only on acceptance; rejected best-effort text is diagnostic. Export runs the same gate again. `tests/maskgate/invariant.test.ts` independently compares every proposal in every reply JSON file, including regeneration and unsupported claims, against its current target. Test sources and the runner are unexecuted in Dirty Mode; no invariant result has been measured.

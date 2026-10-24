@@ -1,0 +1,5 @@
+# Patched downloads
+
+`applyApprovedFixes(doc, approvals, {source, context, glossary})` creates a download; it never writes a locale in place. Supply current metadata so export can reconstruct whole-item masking and eligibility. Ineligible source/target imports and incompatible dialects are refused. A fix must have an active approval, matching finding/key/locale, unchanged suggestion hash, current fingerprint and aligned existing source/target string. Competing approvals are held.
+
+Export rebuilds masking with current source, target, key, context, glossary and selected siblings, then re-runs the gate against the current target. No missing key is inserted. `jsonc-parser` modify/applyEdits operates on the original source text; only the recorded string value range may change, with a direct identical value-range edit when modify would reformat neighbours. BOM is re-added. Tests assert byte identity outside that range, stale bindings and ineligible files. Runtime byte preservation remains unverified in Dirty Mode.

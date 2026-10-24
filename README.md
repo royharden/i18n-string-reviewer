@@ -1,54 +1,42 @@
 # i18n String Reviewer
 
-A review-only React app for localisation files: upload one source locale JSON and up to 10
-targets, get deterministic findings with stable rule ids, optionally run a context-aware model
-review over **masked, redacted** text, then approve, reject or skip each finding and fix. Downloads
-contain only approved fixes that passed a structural gate. Nothing is written in place.
+Review locale JSON, inspect deterministic and optional model findings, decide what to accept, and download only explicitly approved fixes that pass a structure-preserving gate. Original files stay local and are never overwritten.
 
-## Status — read this first
+## Construction status
 
-**Source-complete for Dirty Mode construction — runtime unverified.**
+**Dirty Mode source construction in progress — runtime unverified.** M1–M3 deterministic checks, synthetic corpus and mock review workflow/UI are statically reviewed. Live integration and evaluation source remain next.
 
-- This repository was written under **Dirty Mode**: static checks only. **Nothing has been
-  installed, built, type-checked, linted, tested or run.** No `npm install` has happened and there
-  is **no lockfile**.
-- The only check performed is `node scripts/syntax-check.mjs .`, which strips TypeScript types
-  and asks Node to parse each `.ts` file. It does not type-check, resolve imports or cover `.tsx`.
-- **Not import-ready** (Bolt or otherwise) until a lockfile exists and the deferred validation in
-  [`docs/DEFERRED-VALIDATION.md`](docs/DEFERRED-VALIDATION.md) (D1, D2 first) has passed.
-- No accuracy is claimed. The evaluation table does not exist yet.
+No dependencies have been installed; no application, test suite, lint, typecheck, build, browser, database or provider call has run. Static checks consist of source tracing and TypeScript type-stripping/syntax parsing. They do not resolve imports, type-check, or parse TSX. There is **no lockfile**. This repo is **not import-ready until D1**, followed by D2 and the remaining applicable checks in [deferred validation](docs/DEFERRED-VALIDATION.md).
 
-## What is built (milestone M1)
+## Try it after validation is authorized
 
-- Project scaffold: `package.json` (exact version pins, unverified — D1), TypeScript strict
-  configs, Vite, Vitest, ESLint, a placeholder React shell (`src/App.tsx`), CSP `<meta>` in
-  `index.html`, `.env.example` (names only).
-- `src/core/l10nchecks/` — the deterministic core: strict locale-file import (caps, fatal UTF-8,
-  duplicates, path-segment keys), `context.json` / `glossary.json` validation, a validation report,
-  dialect detection (`icu | i18next | plain`), placeholder tokenizer, ICU path signature, tag tree
-  compare, plural categories via `Intl.PluralRules`, number normalisation, and **all 17 rules**.
-  See [`src/core/l10nchecks/README.md`](src/core/l10nchecks/README.md).
-- `src/core/shared/hash.ts` — SHA-256 via Web Crypto.
-- Tests **written, not run**: `tests/l10nchecks/**` (one file per rule plus parser, metadata and
-  helper tests) and `tests/traps/**` (the deterministic demo traps).
+From this inner repository, first follow D1/D2. Then:
 
-Not built yet: masking/redaction and the fix gate, model reviewers, the review UI, rulings,
-patched export, the edge function and budget ledger, the evaluation script and results.
+```sh
+npm run dev
+npm run demo
+npm run eval
+```
 
-## Planned scripts (none has been run)
+The intended default is mock mode, with synthetic fixtures and no API keys or network. These commands have not been run during construction. A successful future install/build alone will not verify the backend.
 
-| Script | Purpose |
-|---|---|
-| `npm run dev` / `build` | Vite dev server / production build |
-| `npm run typecheck` | `tsc --noEmit -p .` |
-| `npm run lint` | ESLint |
-| `npm test` | `vitest run` |
-| `npm run demo` | Mock-only demo, no keys, no network (M3) |
-| `npm run eval` | Evaluation table (M6) |
-| `npm run sync:function` | Copy `src/core/shared` into the edge function (M4) |
-| `npm run syntax-check` | The static type-strip parse used in Dirty Mode |
+## Data and architecture
 
-## Licence
+- `src/core/l10nchecks`: strict UTF-8 JSON import, segment-array paths, locale/dialect checks, metadata validation and seventeen deterministic rules.
+- `src/core/maskgate`, `cited`, `context`, `rulings`, `export`, `review`: masked review, evidence validation, structural fix gate, fingerprint-bound decisions and download-only patches (M3 construction).
+- `fixtures`: agent-authored MIT TaskBoard translations and planted semantic labels. Seed selection and the frozen source-key split are disclosed in `fixtures/manifest.json`; this partition was selected before model/rule outputs existed, rather than drawn blindly.
+- The planned backend stores only paid-call accounting. Locale text and rulings are not persisted server-side. Provider credentials belong in server/eval environment variables, never frontend variables.
 
-MIT — see [LICENSE](LICENSE). Prior-art ideas are listed in [VENDORED.md](VENDORED.md); no
-third-party source is vendored.
+JSON only; PO and other formats, translation generation, visual overflow/RTL layout verification and translation memory are outside the MVP. Files in one comparison must use a common confirmed dialect and distinct target filenames; rename same-named target files before importing. Known parser/tokenizer approximations are described in the core README and deferred validation.
+
+## Results and cost
+
+**Pending — no evaluation has run.** There are no measured quality, invariant, latency or cost results. Mock replay demonstrates intended fixture/gate behavior only after it is actually executed; it cannot measure model accuracy. Live context-off/on and experimental Jev/cascade comparisons remain unmeasured.
+
+What the table proves: structural recall shows the rules fire on known mutation shapes, not that they cover real-world files; the semantic table is on agent-written translations by a possibly related model family, so absolute recall is not comparable to human-labelled data. The `android-l10n` slice (open question 3) is the mitigation.
+
+## Development
+
+Exact dependency pins are unverified until installation. Declared commands: `npm run typecheck`, `npm run typecheck:node`, `npm run lint`, `npm test`, `npm run build`. `node scripts/syntax-check.mjs <directory>` is syntax-only and does not execute application/test modules.
+
+Coding agents authored the source and fixtures. Independent subagents reviewed construction statically; runtime validation is deferred. See [VENDORED.md](VENDORED.md) for prior-art concepts; no third-party source was copied. MIT — [LICENSE](LICENSE).

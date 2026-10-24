@@ -125,3 +125,27 @@ the retained whole-parent case. `checkVersion` is `1.0.3`. Source inspection and
 only; D2 after D1 must exercise these sources. No application/test/parser imports were executed.
 
 Rework author: 0584_Codex_GPT-61Sol_Sub_S34-M1-Coder.
+
+## M3 construction — checks still deferred
+
+The mock review/gate/export/UI source and regression sources are being completed under Dirty Mode; none has executed. After D1, use `npm test -- tests/maskgate tests/cited tests/context tests/rulings tests/export tests/pipeline` and `npm run demo`, then `npm run typecheck && npm run typecheck:node && npm run lint && npm run build`. Check every recorded reply and regenerated proposal through the invariant suite; verify only approved/current suggestions patch original value ranges and bad imports cannot export.
+
+TSX receives focused source inspection only in this run (PLAN common-check policy); no JSX parser/compiler has been installed or invoked. D2 must validate React/Vite imports, types and JSX; D14 must exercise uploads/confirmed dialects, same-dialect enforcement, demo sets and broken files, evidence/diffs, a/r/s/j/k input guards, bidi display-only mapping, rulings JSONL errors/replay/invalidation/competing approval selection and findings/rulings/patched downloads. Start no browser/server during Dirty Mode.
+
+### M3 demo branch-attack rework — 2026-10-24
+
+The manifest-served ICU reply file now binds the cross-branch token move to French `task.overdue`
+and an added plural branch to French `search.results`, separate existing demo/dev keys with
+supported masked-target evidence. Synthetic standalone cases remain in the all-reply invariant
+suite. The written full-pipeline regression in `tests/pipeline/demo-snapshot.test.ts` loads the
+manifest's actual files through `createMockReviewer` and `runPipeline`, then asserts the supported
+findings have no suggestion, both rejection reasons (`token_moved_branch`, `structure_changed`)
+are exposed, counters reach the CLI summary and invariant violations are empty.
+
+These assertions have not executed. After D1 and Dirty Mode closure, run
+`npm test -- tests/pipeline/demo-snapshot.test.ts tests/maskgate/invariant.test.ts`, then
+`npm run demo`; under D14, Load demo → Review strings must display both attacks in Gate rejections.
+Runtime dependency/parser behavior and UI execution remain unverified; only source inspection,
+JSON parsing and TypeScript syntax parsing are authorized in this rework.
+
+Rework author: 0685_Codex_GPT-61Sol_Sub_S34-M3-Rework (GPT-6.1 Sol, xhigh).
