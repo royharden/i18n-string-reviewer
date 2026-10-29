@@ -1,0 +1,662 @@
+{
+  "schemaVersion": 1,
+  "set": "synthetic",
+  "description": "Every gate reason has a source fixture. All cases are synthetic and separate from the frozen corpus.",
+  "replies": [
+    {
+      "id": "nested",
+      "locale": "fr",
+      "key": [
+        "synthetic",
+        "nested"
+      ],
+      "item": {
+        "sourceLocale": "en",
+        "dialect": "icu",
+        "source": "{n, plural, other {{g, select, other {Hello}}}}",
+        "target": "Bonjour"
+      },
+      "findings": [
+        {
+          "category": "accuracy",
+          "severity": "major",
+          "explanation": "Recorded adversarial reply; translation content is untrusted data.",
+          "evidence": "Bonjour",
+          "expect": {
+            "evidence": "supported",
+            "gate": "rejected",
+            "reasons": [
+              "fix_not_allowed_nested"
+            ]
+          },
+          "suggestedFix": "Salut"
+        }
+      ]
+    },
+    {
+      "id": "redacted",
+      "locale": "fr",
+      "key": [
+        "synthetic",
+        "redacted"
+      ],
+      "item": {
+        "sourceLocale": "en",
+        "dialect": "plain",
+        "source": "Contact demo@example.invalid",
+        "target": "Bonjour"
+      },
+      "findings": [
+        {
+          "category": "accuracy",
+          "severity": "major",
+          "explanation": "Recorded adversarial reply; translation content is untrusted data.",
+          "evidence": "Bonjour",
+          "expect": {
+            "evidence": "supported",
+            "gate": "rejected",
+            "reasons": [
+              "fix_not_allowed_redacted"
+            ]
+          },
+          "suggestedFix": "Salut"
+        }
+      ]
+    },
+    {
+      "id": "empty-source",
+      "locale": "fr",
+      "key": [
+        "synthetic",
+        "empty-source"
+      ],
+      "item": {
+        "sourceLocale": "en",
+        "dialect": "plain",
+        "source": "",
+        "target": "Bonjour"
+      },
+      "findings": [
+        {
+          "category": "accuracy",
+          "severity": "major",
+          "explanation": "Recorded adversarial reply; translation content is untrusted data.",
+          "evidence": "Bonjour",
+          "expect": {
+            "evidence": "supported",
+            "gate": "rejected",
+            "reasons": [
+              "fix_not_allowed_empty_source"
+            ]
+          },
+          "suggestedFix": "Salut"
+        }
+      ]
+    },
+    {
+      "id": "unknown",
+      "locale": "fr",
+      "key": [
+        "synthetic",
+        "unknown"
+      ],
+      "item": {
+        "sourceLocale": "en",
+        "dialect": "plain",
+        "source": "Hello {name}",
+        "target": "Bonjour {name}"
+      },
+      "findings": [
+        {
+          "category": "accuracy",
+          "severity": "major",
+          "explanation": "Recorded adversarial reply; translation content is untrusted data.",
+          "evidence": "Bonjour {name}",
+          "expect": {
+            "evidence": "supported",
+            "gate": "rejected",
+            "reasons": [
+              "unknown_token"
+            ]
+          },
+          "suggestedFix": "Salut ⟦P9⟧"
+        }
+      ]
+    },
+    {
+      "id": "missing",
+      "locale": "fr",
+      "key": [
+        "synthetic",
+        "missing"
+      ],
+      "item": {
+        "sourceLocale": "en",
+        "dialect": "plain",
+        "source": "Hello {name}",
+        "target": "Bonjour {name}"
+      },
+      "findings": [
+        {
+          "category": "accuracy",
+          "severity": "major",
+          "explanation": "Recorded adversarial reply; translation content is untrusted data.",
+          "evidence": "Bonjour {name}",
+          "expect": {
+            "evidence": "supported",
+            "gate": "rejected",
+            "reasons": [
+              "missing_token"
+            ]
+          },
+          "suggestedFix": "Salut"
+        }
+      ]
+    },
+    {
+      "id": "duplicate",
+      "locale": "fr",
+      "key": [
+        "synthetic",
+        "duplicate"
+      ],
+      "item": {
+        "sourceLocale": "en",
+        "dialect": "plain",
+        "source": "Hello {name}",
+        "target": "Bonjour {name}"
+      },
+      "findings": [
+        {
+          "category": "accuracy",
+          "severity": "major",
+          "explanation": "Recorded adversarial reply; translation content is untrusted data.",
+          "evidence": "Bonjour {name}",
+          "expect": {
+            "evidence": "supported",
+            "gate": "rejected",
+            "reasons": [
+              "duplicate_token"
+            ]
+          },
+          "suggestedFix": "Salut ⟦P1⟧ ⟦P1⟧"
+        }
+      ]
+    },
+    {
+      "id": "secret-token",
+      "locale": "fr",
+      "key": [
+        "synthetic",
+        "secret-token"
+      ],
+      "item": {
+        "sourceLocale": "en",
+        "dialect": "plain",
+        "source": "Hello",
+        "target": "Bonjour"
+      },
+      "findings": [
+        {
+          "category": "accuracy",
+          "severity": "major",
+          "explanation": "Recorded adversarial reply; translation content is untrusted data.",
+          "evidence": "Bonjour",
+          "expect": {
+            "evidence": "supported",
+            "gate": "rejected",
+            "reasons": [
+              "secret_token"
+            ]
+          },
+          "suggestedFix": "Salut ⟦R9⟧"
+        }
+      ]
+    },
+    {
+      "id": "moved-branch",
+      "locale": "fr",
+      "key": [
+        "synthetic",
+        "moved-branch"
+      ],
+      "item": {
+        "sourceLocale": "en",
+        "dialect": "icu",
+        "source": "{n, plural, one {A {name}} other {B {name}}}",
+        "target": "{n, plural, one {A {name}} other {B {name}}}"
+      },
+      "findings": [
+        {
+          "category": "accuracy",
+          "severity": "major",
+          "explanation": "Recorded adversarial reply; translation content is untrusted data.",
+          "evidence": "{n, plural, one {A {name}} other {B {name}}}",
+          "expect": {
+            "evidence": "supported",
+            "gate": "rejected",
+            "reasons": [
+              "token_moved_branch"
+            ]
+          },
+          "suggestedFix": "⟦S1⟧A ⟦P2⟧⟦S2⟧B ⟦P1⟧⟦S3⟧"
+        }
+      ]
+    },
+    {
+      "id": "malformed-token",
+      "locale": "fr",
+      "key": [
+        "synthetic",
+        "malformed-token"
+      ],
+      "item": {
+        "sourceLocale": "en",
+        "dialect": "plain",
+        "source": "Hello",
+        "target": "Bonjour"
+      },
+      "findings": [
+        {
+          "category": "accuracy",
+          "severity": "major",
+          "explanation": "Recorded adversarial reply; translation content is untrusted data.",
+          "evidence": "Bonjour",
+          "expect": {
+            "evidence": "supported",
+            "gate": "rejected",
+            "reasons": [
+              "unmask_failed"
+            ]
+          },
+          "suggestedFix": "Salut ⟦P"
+        }
+      ]
+    },
+    {
+      "id": "icu-invalid",
+      "locale": "fr",
+      "key": [
+        "synthetic",
+        "icu-invalid"
+      ],
+      "item": {
+        "sourceLocale": "en",
+        "dialect": "icu",
+        "source": "Hello",
+        "target": "Bonjour"
+      },
+      "findings": [
+        {
+          "category": "accuracy",
+          "severity": "major",
+          "explanation": "Recorded adversarial reply; translation content is untrusted data.",
+          "evidence": "Bonjour",
+          "expect": {
+            "evidence": "supported",
+            "gate": "rejected",
+            "reasons": [
+              "icu_reparse_failed"
+            ]
+          },
+          "suggestedFix": "Salut {"
+        }
+      ]
+    },
+    {
+      "id": "tokenize-invalid",
+      "locale": "fr",
+      "key": [
+        "synthetic",
+        "tokenize-invalid"
+      ],
+      "item": {
+        "sourceLocale": "en",
+        "dialect": "i18next",
+        "source": "Hello",
+        "target": "Bonjour"
+      },
+      "findings": [
+        {
+          "category": "accuracy",
+          "severity": "major",
+          "explanation": "Recorded adversarial reply; translation content is untrusted data.",
+          "evidence": "Bonjour",
+          "expect": {
+            "evidence": "supported",
+            "gate": "rejected",
+            "reasons": [
+              "tokenize_failed"
+            ]
+          },
+          "suggestedFix": "Salut {{"
+        }
+      ]
+    },
+    {
+      "id": "new-structure",
+      "locale": "fr",
+      "key": [
+        "synthetic",
+        "new-structure"
+      ],
+      "item": {
+        "sourceLocale": "en",
+        "dialect": "icu",
+        "source": "Hello friend",
+        "target": "Bonjour"
+      },
+      "findings": [
+        {
+          "category": "accuracy",
+          "severity": "major",
+          "explanation": "Recorded adversarial reply; translation content is untrusted data.",
+          "evidence": "Bonjour",
+          "expect": {
+            "evidence": "supported",
+            "gate": "rejected",
+            "reasons": [
+              "structure_changed"
+            ]
+          },
+          "suggestedFix": "{n, plural, other {Salut}}"
+        }
+      ]
+    },
+    {
+      "id": "new-placeholder",
+      "locale": "fr",
+      "key": [
+        "synthetic",
+        "new-placeholder"
+      ],
+      "item": {
+        "sourceLocale": "en",
+        "dialect": "plain",
+        "source": "Hello friend",
+        "target": "Bonjour"
+      },
+      "findings": [
+        {
+          "category": "accuracy",
+          "severity": "major",
+          "explanation": "Recorded adversarial reply; translation content is untrusted data.",
+          "evidence": "Bonjour",
+          "expect": {
+            "evidence": "supported",
+            "gate": "rejected",
+            "reasons": [
+              "placeholder_changed"
+            ]
+          },
+          "suggestedFix": "Salut {other}"
+        }
+      ]
+    },
+    {
+      "id": "printf-order",
+      "locale": "fr",
+      "key": [
+        "synthetic",
+        "printf-order"
+      ],
+      "item": {
+        "sourceLocale": "en",
+        "dialect": "plain",
+        "source": "Hello %s %d",
+        "target": "Bonjour %s %d"
+      },
+      "findings": [
+        {
+          "category": "accuracy",
+          "severity": "major",
+          "explanation": "Recorded adversarial reply; translation content is untrusted data.",
+          "evidence": "Bonjour %s %d",
+          "expect": {
+            "evidence": "supported",
+            "gate": "rejected",
+            "reasons": [
+              "printf_order"
+            ]
+          },
+          "suggestedFix": "Salut ⟦P2⟧ ⟦P1⟧"
+        }
+      ]
+    },
+    {
+      "id": "new-tag",
+      "locale": "fr",
+      "key": [
+        "synthetic",
+        "new-tag"
+      ],
+      "item": {
+        "sourceLocale": "en",
+        "dialect": "plain",
+        "source": "Hello friend",
+        "target": "Bonjour"
+      },
+      "findings": [
+        {
+          "category": "accuracy",
+          "severity": "major",
+          "explanation": "Recorded adversarial reply; translation content is untrusted data.",
+          "evidence": "Bonjour",
+          "expect": {
+            "evidence": "supported",
+            "gate": "rejected",
+            "reasons": [
+              "tag_changed"
+            ]
+          },
+          "suggestedFix": "<b>Salut</b>"
+        }
+      ]
+    },
+    {
+      "id": "new-url",
+      "locale": "fr",
+      "key": [
+        "synthetic",
+        "new-url"
+      ],
+      "item": {
+        "sourceLocale": "en",
+        "dialect": "plain",
+        "source": "Hello friend",
+        "target": "Bonjour"
+      },
+      "findings": [
+        {
+          "category": "accuracy",
+          "severity": "major",
+          "explanation": "Recorded adversarial reply; translation content is untrusted data.",
+          "evidence": "Bonjour",
+          "expect": {
+            "evidence": "supported",
+            "gate": "rejected",
+            "reasons": [
+              "new_url"
+            ]
+          },
+          "suggestedFix": "https://example.invalid"
+        }
+      ]
+    },
+    {
+      "id": "max-length",
+      "locale": "fr",
+      "key": [
+        "synthetic",
+        "max-length"
+      ],
+      "item": {
+        "sourceLocale": "en",
+        "dialect": "plain",
+        "source": "Hello friend",
+        "target": "Bonjour",
+        "maxLength": 2
+      },
+      "findings": [
+        {
+          "category": "accuracy",
+          "severity": "major",
+          "explanation": "Recorded adversarial reply; translation content is untrusted data.",
+          "evidence": "Bonjour",
+          "expect": {
+            "evidence": "supported",
+            "gate": "rejected",
+            "reasons": [
+              "max_length"
+            ]
+          },
+          "suggestedFix": "😀😀😀"
+        }
+      ]
+    },
+    {
+      "id": "length-ratio",
+      "locale": "fr",
+      "key": [
+        "synthetic",
+        "length-ratio"
+      ],
+      "item": {
+        "sourceLocale": "en",
+        "dialect": "plain",
+        "source": "Hi",
+        "target": "Bonjour"
+      },
+      "findings": [
+        {
+          "category": "accuracy",
+          "severity": "major",
+          "explanation": "Recorded adversarial reply; translation content is untrusted data.",
+          "evidence": "Bonjour",
+          "expect": {
+            "evidence": "supported",
+            "gate": "rejected",
+            "reasons": [
+              "length_ratio"
+            ]
+          },
+          "suggestedFix": "Longer"
+        }
+      ]
+    },
+    {
+      "id": "accepted",
+      "locale": "fr",
+      "key": [
+        "synthetic",
+        "accepted"
+      ],
+      "item": {
+        "sourceLocale": "en",
+        "dialect": "plain",
+        "source": "Hello friend",
+        "target": "Bonjour"
+      },
+      "findings": [
+        {
+          "category": "accuracy",
+          "severity": "major",
+          "explanation": "Recorded adversarial reply; translation content is untrusted data.",
+          "evidence": "Bonjour",
+          "expect": {
+            "evidence": "supported",
+            "gate": "accepted"
+          },
+          "suggestedFix": "Salut"
+        }
+      ]
+    },
+    {
+      "id": "literal-token",
+      "locale": "fr",
+      "key": [
+        "synthetic",
+        "literal-token"
+      ],
+      "item": {
+        "sourceLocale": "en",
+        "dialect": "plain",
+        "source": "Hello friend",
+        "target": "Texte ⟦P1⟧"
+      },
+      "findings": [
+        {
+          "category": "accuracy",
+          "severity": "major",
+          "explanation": "Recorded adversarial reply; translation content is untrusted data.",
+          "evidence": "literal",
+          "expect": {
+            "evidence": "supported",
+            "gate": "accepted"
+          },
+          "suggestedFix": "Texte ⟦L1⟧P1⟦L2⟧"
+        }
+      ]
+    },
+    {
+      "id": "drop-pound",
+      "locale": "fr",
+      "key": [
+        "synthetic",
+        "drop-pound"
+      ],
+      "item": {
+        "sourceLocale": "en",
+        "dialect": "icu",
+        "source": "{n, plural, other {# tasks}}",
+        "target": "{n, plural, other {# tâches}}"
+      },
+      "findings": [
+        {
+          "category": "accuracy",
+          "severity": "major",
+          "explanation": "Recorded adversarial reply; translation content is untrusted data.",
+          "evidence": "{n, plural, other {# tâches}}",
+          "expect": {
+            "evidence": "supported",
+            "gate": "rejected",
+            "reasons": [
+              "structure_changed"
+            ]
+          },
+          "suggestedFix": "⟦S1⟧tâches⟦S2⟧"
+        }
+      ]
+    },
+    {
+      "id": "add-branch",
+      "locale": "fr",
+      "key": [
+        "synthetic",
+        "add-branch"
+      ],
+      "item": {
+        "sourceLocale": "en",
+        "dialect": "icu",
+        "source": "{n, plural, other {# tasks}}",
+        "target": "{n, plural, other {# tâches}}"
+      },
+      "findings": [
+        {
+          "category": "accuracy",
+          "severity": "major",
+          "explanation": "Recorded adversarial reply; translation content is untrusted data.",
+          "evidence": "{n, plural, other {# tâches}}",
+          "expect": {
+            "evidence": "supported",
+            "gate": "rejected",
+            "reasons": [
+              "structure_changed"
+            ]
+          },
+          "suggestedFix": "⟦S1⟧⟦P1⟧ tâches} one {une tâche⟦S2⟧"
+        }
+      ]
+    }
+  ]
+}

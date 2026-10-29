@@ -1,0 +1,13 @@
+{
+  "welcomeBack": "Bon retour sur TaskBoard, {{name}}",
+  "taskCount_one": "{{count}} tâche",
+  "taskCount_many": "{{count}} de tâches",
+  "taskCount_other": "{{count}} tâches",
+  "attachments_one": "{{count}} pièce jointe",
+  "attachments_many": "{{count}} de pièces jointes",
+  "attachments_other": "{{count}} pièces jointes",
+  "uploadProgress": "Sur %2$s fichiers, %1$s ont été envoyés",
+  "lastEdit": "Modifié il y a %d minutes par %s",
+  "retryIn": "Nouvelle tentative dans %{seconds} secondes",
+  "storage": "{{used, number}} Mo utilisés sur {{total, number}} Mo"
+}

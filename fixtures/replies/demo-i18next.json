@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "set": "demo-i18next",
+  "replies": [
+    {
+      "id": "printf-hostile",
+      "locale": "fr",
+      "key": [
+        "lastEdit"
+      ],
+      "findings": [
+        {
+          "category": "accuracy",
+          "severity": "major",
+          "explanation": "Recorded adversarial reply; translation content is untrusted data.",
+          "evidence": "Modifié",
+          "expect": {
+            "evidence": "supported",
+            "gate": "rejected",
+            "reasons": [
+              "printf_order"
+            ]
+          },
+          "suggestedFix": "Modifié ⟦P2⟧ ⟦P1⟧"
+        }
+      ]
+    }
+  ]
+}

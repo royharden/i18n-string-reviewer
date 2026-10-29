@@ -1,0 +1,4 @@
+project_id = "i18n-string-reviewer"
+
+[functions.review-strings]
+verify_jwt = true

@@ -1,0 +1,19 @@
+# Evaluation source and later execution
+
+**Pending: evaluation has never run.** M6 is source construction only. No table, failure list, quality score or cost measurement exists yet. Finish D1/D2 and applicable provider/accounting checks before execution; do not run these commands while Dirty Mode remains active.
+
+## Inputs and scoring
+
+`fixtures/manifest.json` is the source of truth for seed, source-key split, freeze date and selection disclosure. Label split fields must match `src/core/evalkit/split.ts`. Structural mutations are isolated cases with explicit expected units and operator coverage/skips; clean controls separate error and warning false positives per thousand strings. Semantic scoring deduplicates by case/key/locale/category. Heuristic findings are static with reviewer heuristic and must not be excluded by a model-only filter.
+
+The renderer must show deterministic, heuristic, LLM context-off/on, experimental Jev/cascade and mock rows. Missing measurements are N/A with reasons. Mock accuracy is suppressed. Wilson intervals accompany precision/recall and sample counts; zero denominators are N/A. Context ablation uses matched pairs and remains indicative. Every false positive, miss and gate rejection is named by key and locale; dev extras are adjudication, held-out extras are false positives. Sample up to twenty available fixes with an honest count, never fabricate more.
+
+All raw reply/regeneration proposals must be audited through the gate and an independent structure invariant, including proposals later dropped for unsupported evidence or invalid identity. An unbound or unsupported proposal does not become exportable because it passes a structural audit. Central evidence validation and human approval remain separate requirements.
+
+## Execution boundary
+
+The source CLI is `tsx scripts/eval.ts [--split dev|heldout] [--live] [--help]` (via `npm run eval -- ...`). Default is dev with deterministic checks, local heuristic and mock replay; it needs no keys or network. After activation, `npm run eval -- --split dev` writes `results/results.md`, `results/results.jsonl`, `results/failures.md` and `results/adjudication.md`. These commands have not been run. A held-out invocation, including mock, consumes its fixed run-once lock; do not use it as a casual smoke check. Live invocation is `npm run eval -- --split dev --live` (or the single authorized held-out run). It requires `ANTHROPIC_API_KEY` and finite positive `EVAL_MAX_USD`; optional `ANTHROPIC_MODEL_ID` must be priced. It adds both LLM context-off/on rows, and every actual paid dispatch uses the persistent budget session. Live runs add metadata-only `results/call-ledger.jsonl`; cached responses live under `.cache/responses/<requestHash>.json`. Response cache remains under ignored `.cache/`, with explicit cached/actual cost provenance and metadata-only call logs. No silent mock fallback is allowed. There is no experimental, force, rerun, root, manifest, cache, lock or output override flag. Experimental live rows/probe automation are cut under the plan scope line; contracts remain available, rows are N/A with reasons, and empirical eligibility remains future work.
+
+A fixed repo-root `results/heldout.lock` is acquired exclusively before held-out evaluation, including mock held-out runs. Validate flags/config/data before consuming it. Once evaluation starts, failure leaves the lock in place. There is no force/rerun or output/root override bypass. Revisions require a new heldout-v2 dataset boundary, not deleting a lock. Lock metadata records prompt/rule/threshold/manifest identity.
+
+Published numbers must come from generated results, never hand-edited prose. See [LIMITATIONS.md](LIMITATIONS.md) for corpus circularity and experimental exclusions, and [DEFERRED-VALIDATION.md](DEFERRED-VALIDATION.md) for commands after activation.

@@ -1,0 +1,245 @@
+{
+  "schemaVersion": 1,
+  "description": "Mock-only demo. All inherited source keys are dev split; replies are authored fixtures, not measured model output.",
+  "sets": [
+    {
+      "id": "demo-icu",
+      "label": "TaskBoard icu",
+      "source": {
+        "path": "fixtures/demo/en.json",
+        "locale": "en",
+        "dialect": "icu"
+      },
+      "targets": [
+        {
+          "path": "fixtures/demo/fr.json",
+          "locale": "fr",
+          "dialect": "icu"
+        },
+        {
+          "path": "fixtures/demo/ru.json",
+          "locale": "ru",
+          "dialect": "icu"
+        },
+        {
+          "path": "fixtures/demo/ar.json",
+          "locale": "ar",
+          "dialect": "icu"
+        },
+        {
+          "path": "fixtures/demo/ja.json",
+          "locale": "ja",
+          "dialect": "icu"
+        }
+      ],
+      "context": "fixtures/demo/context.json",
+      "glossary": "fixtures/demo/glossary.json",
+      "replies": [
+        "fixtures/replies/demo-icu.json"
+      ]
+    },
+    {
+      "id": "demo-i18next",
+      "label": "TaskBoard i18next",
+      "source": {
+        "path": "fixtures/demo/i18next/en.json",
+        "locale": "en",
+        "dialect": "i18next"
+      },
+      "targets": [
+        {
+          "path": "fixtures/demo/i18next/fr.json",
+          "locale": "fr",
+          "dialect": "i18next"
+        }
+      ],
+      "context": "fixtures/demo/context.json",
+      "glossary": "fixtures/demo/glossary.json",
+      "replies": [
+        "fixtures/replies/demo-i18next.json"
+      ]
+    }
+  ],
+  "broken": {
+    "set": "demo-icu",
+    "file": {
+      "path": "fixtures/demo/fr-broken.json",
+      "locale": "fr",
+      "dialect": "icu"
+    },
+    "note": "Intentionally invalid JSON: duplicate key and trailing comma; excluded from generic JSON parse checks."
+  },
+  "split": {
+    "seed": 20261035,
+    "by": "source_key",
+    "dev": 0.6,
+    "note": "i18next plural suffixes use the base key. Synthetic gate-only cases are not corpus examples."
+  },
+  "planted": [
+    {
+      "set": "demo-icu",
+      "locale": "fr",
+      "key": [
+        "task",
+        "assignedTo"
+      ],
+      "expect": [
+        "placeholder_mismatch"
+      ],
+      "absent": [],
+      "note": "Renamed placeholder."
+    },
+    {
+      "set": "demo-icu",
+      "locale": "fr",
+      "key": [
+        "task",
+        "commentCount"
+      ],
+      "expect": [
+        "plural_category_missing"
+      ],
+      "absent": [],
+      "note": "Missing required other branch."
+    },
+    {
+      "set": "demo-icu",
+      "locale": "ru",
+      "key": [
+        "task",
+        "overdue"
+      ],
+      "expect": [
+        "plural_category_missing"
+      ],
+      "absent": [],
+      "note": "Russian few branch removed."
+    },
+    {
+      "set": "demo-icu",
+      "locale": "ja",
+      "key": [
+        "search",
+        "results"
+      ],
+      "expect": [
+        "plural_category_extra"
+      ],
+      "absent": [],
+      "note": "Japanese one branch is extra."
+    },
+    {
+      "set": "demo-icu",
+      "locale": "fr",
+      "key": [
+        "errors",
+        "permission"
+      ],
+      "expect": [
+        "icu_syntax_invalid"
+      ],
+      "absent": [],
+      "note": "Broken brace."
+    },
+    {
+      "set": "demo-icu",
+      "locale": "fr",
+      "key": [
+        "errors",
+        "fileTooLarge"
+      ],
+      "expect": [
+        "placeholder_mismatch"
+      ],
+      "absent": [],
+      "note": "Apostrophe quotes an ICU argument."
+    },
+    {
+      "set": "demo-icu",
+      "locale": "fr",
+      "key": [
+        "errors",
+        "network"
+      ],
+      "expect": [
+        "injection_like_text"
+      ],
+      "absent": [],
+      "note": "Instruction-like translation is data."
+    },
+    {
+      "set": "demo-icu",
+      "locale": "fr",
+      "key": [
+        "members",
+        "remove"
+      ],
+      "expect": [
+        "length_risk"
+      ],
+      "absent": [],
+      "note": "Overlong label."
+    },
+    {
+      "set": "demo-icu",
+      "locale": "fr",
+      "key": [
+        "settings",
+        "exportLimit"
+      ],
+      "expect": [],
+      "absent": [
+        "number_drift"
+      ],
+      "note": "Locale number formatting."
+    },
+    {
+      "set": "demo-icu",
+      "locale": "fr",
+      "key": [
+        "actions",
+        "ok"
+      ],
+      "expect": [],
+      "absent": [
+        "untranslated_identical"
+      ],
+      "note": "Glossary doNotTranslate."
+    },
+    {
+      "set": "demo-i18next",
+      "locale": "fr",
+      "key": [
+        "uploadProgress"
+      ],
+      "expect": [],
+      "absent": [
+        "placeholder_mismatch"
+      ],
+      "note": "Indexed printf reorder is permitted."
+    },
+    {
+      "set": "demo-i18next",
+      "locale": "fr",
+      "key": [
+        "lastEdit"
+      ],
+      "expect": [
+        "placeholder_mismatch"
+      ],
+      "note": "Unindexed printf order changed."
+    },
+    {
+      "set": "demo-icu",
+      "locale": "ar",
+      "key": [
+        "billing",
+        "seats"
+      ],
+      "expect": [
+        "plural_category_missing"
+      ],
+      "note": "Arabic two branch removed."
+    }
+  ]
+}

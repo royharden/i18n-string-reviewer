@@ -1,0 +1,7 @@
+# Review pipeline and mock replies
+
+`importFiles` accepts one source and up to ten distinct target locales, with confirmed locales and dialects plus optional context/glossary bytes. Cross-dialect comparisons fail explicitly. Target filenames must also be distinct because diagnostics use filenames as file identity; rename identically named uploads before importing them together. `runPipeline(imported, {reviewer?, scope?, batchSize?, reviewOptions?})` runs deterministic checks, then eligible aligned strings in sequential batches of at most twenty. Reviewers receive only masked items and return untrusted `rawFindings`; producing-batch validation, evidence checks and gating remain inside the pipeline.
+
+`createMockReviewer` receives parsed reply JSON supplied by its caller; core performs no file/network IO. Replies match set, locale and key. Synthetic self-contained reply cases are gate fixtures and never served to the UI. `variant: 1` uses recorded regenerated suggestions. The demo manifest pins paths, locales and dialects; all corpus-derived demo source keys are dev split. The broken target is intentionally invalid JSON.
+
+`scripts/demo.ts` is mock only, reads fixtures without environment credentials or fetch, and prints `summarizePipeline`: counts by deterministic rule, model/drop totals, gate rejection reasons and invariant violations. Optional `--write` writes only gitignored demo-output. It has not been run in Dirty Mode. Counts in fixture expectations and test snapshots are authored expectations, never measured evidence.
